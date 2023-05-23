@@ -84,7 +84,7 @@ public class CrearReceta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 510, 200));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 440, 200));
 
         jTextArea1.setBackground(new java.awt.Color(255, 254, 223));
         jTextArea1.setColumns(20);
