@@ -29,7 +29,7 @@ public class portada extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         botonCrear = new javax.swing.JButton();
         botonLista1 = new javax.swing.JButton();
-        labelPortada = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,8 +49,8 @@ public class portada extends javax.swing.JFrame {
         botonLista1.setBorderPainted(false);
         jPanel1.add(botonLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 640, 200, 50));
 
-        labelPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/portada.png"))); // NOI18N
-        jPanel1.add(labelPortada, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 1080));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/portada.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 980));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,7 +60,7 @@ public class portada extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -104,7 +104,7 @@ public class portada extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCrear;
     private javax.swing.JButton botonLista1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel labelPortada;
     // End of variables declaration//GEN-END:variables
 }
