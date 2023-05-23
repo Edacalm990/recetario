@@ -9,20 +9,22 @@ import controladores.RecetaJpaController;
 import entidades.Receta;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author venganzaalchocolate
  */
 public class PaginaLista extends javax.swing.JFrame {
-    
+
     private List<Receta> listaRecetas;
+    RecetaJpaController controladorReceta = new RecetaJpaController(Miscelanea.getEntityManager());
 
     /**
      * Creates new form PaginaLista
      */
     public PaginaLista() {
-        listaRecetas=new ArrayList<>();
+        listaRecetas = new ArrayList<>();
         initComponents();
         cargarRecetas();
     }
@@ -39,8 +41,7 @@ public class PaginaLista extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        botonLEditar = new javax.swing.JButton();
-        botonVer = new javax.swing.JButton();
+        botonBorrar = new javax.swing.JButton();
         botonAtras = new javax.swing.JButton();
         botonLEditar1 = new javax.swing.JButton();
         indiceLabel = new javax.swing.JLabel();
@@ -67,37 +68,30 @@ public class PaginaLista extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 520, 690));
 
-        botonLEditar.setBackground(new java.awt.Color(252, 167, 46));
-        botonLEditar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLEditar.setForeground(new java.awt.Color(255, 255, 255));
-        botonLEditar.setText("Borrar");
-        botonLEditar.setBorderPainted(false);
-        jPanel1.add(botonLEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 990, 110, 50));
-
-        botonVer.setBackground(new java.awt.Color(252, 167, 46));
-        botonVer.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonVer.setForeground(new java.awt.Color(255, 255, 255));
-        botonVer.setText("Ver");
-        botonVer.setBorderPainted(false);
-        botonVer.addActionListener(new java.awt.event.ActionListener() {
+        botonBorrar.setBackground(new java.awt.Color(252, 167, 46));
+        botonBorrar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonBorrar.setForeground(new java.awt.Color(255, 255, 255));
+        botonBorrar.setText("Borrar");
+        botonBorrar.setBorderPainted(false);
+        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonVerActionPerformed(evt);
+                botonBorrarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 990, 120, 50));
+        jPanel1.add(botonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 990, 110, 50));
 
         botonAtras.setBackground(new java.awt.Color(255, 254, 223));
         botonAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/FLECHA.png"))); // NOI18N
         botonAtras.setBorderPainted(false);
         botonAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 990, -1, -1));
+        jPanel1.add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 990, -1, -1));
 
         botonLEditar1.setBackground(new java.awt.Color(252, 167, 46));
         botonLEditar1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         botonLEditar1.setForeground(new java.awt.Color(255, 255, 255));
         botonLEditar1.setText("Editar");
         botonLEditar1.setBorderPainted(false);
-        jPanel1.add(botonLEditar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 990, 110, 50));
+        jPanel1.add(botonLEditar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 990, 110, 50));
 
         indiceLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/indice.png"))); // NOI18N
         jPanel1.add(indiceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 1080));
@@ -116,21 +110,29 @@ public class PaginaLista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerActionPerformed
-        
-        
-        cargarRecetas();
-    }//GEN-LAST:event_botonVerActionPerformed
+    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
+        int index = jList1.getAnchorSelectionIndex();
+        jList1.clearSelection();
+        if (index != -1
+                && JOptionPane.showConfirmDialog(null, "Seguro que deseas borrar la receta %s".formatted(listaRecetas.get(index).getNombreReceta())) == 0) {
+            try {
+                controladorReceta.destroy(listaRecetas.get(index).getCodReceta());
+                cargarRecetas();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No se ha podido borrar la receta, %s".formatted(e));
+            }
+        }
 
-    private void cargarRecetas(){
-        RecetaJpaController controladorReceta= new RecetaJpaController(Miscelanea.getEntityManager());
-        listaRecetas=controladorReceta.findRecetaEntities();
-        String [] listaNombresRecetas=listaRecetas.stream().map((t) -> t.getNombreReceta()).toList().toArray(new String [listaRecetas.size()]);
+
+    }//GEN-LAST:event_botonBorrarActionPerformed
+
+    private void cargarRecetas() {
+
+        listaRecetas = controladorReceta.findRecetaEntities();
+        String[] listaNombresRecetas = listaRecetas.stream().map((t) -> t.getNombreReceta()).toList().toArray(new String[listaRecetas.size()]);
         jList1.setListData(listaNombresRecetas);
     }
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -168,9 +170,8 @@ public class PaginaLista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAtras;
-    private javax.swing.JButton botonLEditar;
+    private javax.swing.JButton botonBorrar;
     private javax.swing.JButton botonLEditar1;
-    private javax.swing.JButton botonVer;
     private javax.swing.JLabel indiceLabel;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
