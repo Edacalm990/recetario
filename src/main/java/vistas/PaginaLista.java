@@ -4,17 +4,27 @@
  */
 package vistas;
 
+import controladores.Miscelanea;
+import controladores.RecetaJpaController;
+import entidades.Receta;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author venganzaalchocolate
  */
 public class PaginaLista extends javax.swing.JFrame {
+    
+    private List<Receta> listaRecetas;
 
     /**
      * Creates new form PaginaLista
      */
     public PaginaLista() {
+        listaRecetas=new ArrayList<>();
         initComponents();
+        cargarRecetas();
     }
 
     /**
@@ -44,7 +54,7 @@ public class PaginaLista extends javax.swing.JFrame {
 
         jList1.setBackground(new java.awt.Color(255, 254, 223));
         jList1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jList1.setFont(new java.awt.Font("Victorian Parlor Vintage Italic", 0, 36)); // NOI18N
+        jList1.setFont(new java.awt.Font("Victorian Parlor Vintage Italic", 0, 24)); // NOI18N
         jList1.setForeground(new java.awt.Color(48, 23, 81));
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -58,17 +68,22 @@ public class PaginaLista extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 520, 690));
 
         botonLEditar.setBackground(new java.awt.Color(252, 167, 46));
-        botonLEditar.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        botonLEditar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         botonLEditar.setForeground(new java.awt.Color(255, 255, 255));
         botonLEditar.setText("Borrar");
         botonLEditar.setBorderPainted(false);
         jPanel1.add(botonLEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 990, 110, 50));
 
         botonVer.setBackground(new java.awt.Color(252, 167, 46));
-        botonVer.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        botonVer.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         botonVer.setForeground(new java.awt.Color(255, 255, 255));
         botonVer.setText("Ver");
         botonVer.setBorderPainted(false);
+        botonVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVerActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 990, 120, 50));
 
         botonAtras.setBackground(new java.awt.Color(255, 254, 223));
@@ -78,7 +93,7 @@ public class PaginaLista extends javax.swing.JFrame {
         jPanel1.add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 990, -1, -1));
 
         botonLEditar1.setBackground(new java.awt.Color(252, 167, 46));
-        botonLEditar1.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        botonLEditar1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         botonLEditar1.setForeground(new java.awt.Color(255, 255, 255));
         botonLEditar1.setText("Editar");
         botonLEditar1.setBorderPainted(false);
@@ -101,6 +116,21 @@ public class PaginaLista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerActionPerformed
+        
+        
+        cargarRecetas();
+    }//GEN-LAST:event_botonVerActionPerformed
+
+    private void cargarRecetas(){
+        RecetaJpaController controladorReceta= new RecetaJpaController(Miscelanea.getEntityManager());
+        listaRecetas=controladorReceta.findRecetaEntities();
+        String [] listaNombresRecetas=listaRecetas.stream().map((t) -> t.getNombreReceta()).toList().toArray(new String [listaRecetas.size()]);
+        jList1.setListData(listaNombresRecetas);
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */

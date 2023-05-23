@@ -4,6 +4,8 @@
  */
 package vistas;
 
+import entidades.Ingrediente;
+
 /**
  *
  * @author venganzaalchocolate
@@ -32,6 +34,7 @@ public class buscarIngrediente extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         botonLista1 = new javax.swing.JButton();
         botonLista2 = new javax.swing.JButton();
+        botonLista4 = new javax.swing.JButton();
         botonLista3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -63,7 +66,7 @@ public class buscarIngrediente extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 510, 210));
 
         botonLista1.setBackground(new java.awt.Color(179, 57, 170));
-        botonLista1.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        botonLista1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         botonLista1.setForeground(new java.awt.Color(255, 255, 255));
         botonLista1.setText("+");
         botonLista1.setBorderPainted(false);
@@ -74,13 +77,30 @@ public class buscarIngrediente extends javax.swing.JFrame {
         botonLista2.setForeground(new java.awt.Color(255, 255, 255));
         botonLista2.setText("Buscar");
         botonLista2.setBorderPainted(false);
+        botonLista2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLista2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonLista2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 140, 50));
 
+        botonLista4.setBackground(new java.awt.Color(252, 167, 46));
+        botonLista4.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonLista4.setForeground(new java.awt.Color(255, 255, 255));
+        botonLista4.setText("-");
+        botonLista4.setBorderPainted(false);
+        jPanel1.add(botonLista4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 60, 50));
+
         botonLista3.setBackground(new java.awt.Color(179, 57, 170));
-        botonLista3.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        botonLista3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         botonLista3.setForeground(new java.awt.Color(255, 255, 255));
         botonLista3.setText("Añadir");
         botonLista3.setBorderPainted(false);
+        botonLista3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLista3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonLista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 130, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
@@ -99,6 +119,14 @@ public class buscarIngrediente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonLista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonLista2ActionPerformed
+
+    private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
+        CrearReceta.ingrediente=new Ingrediente();
+    }//GEN-LAST:event_botonLista3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,6 +167,7 @@ public class buscarIngrediente extends javax.swing.JFrame {
     private javax.swing.JButton botonLista1;
     private javax.swing.JButton botonLista2;
     private javax.swing.JButton botonLista3;
+    private javax.swing.JButton botonLista4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;

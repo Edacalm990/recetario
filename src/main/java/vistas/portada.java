@@ -36,14 +36,14 @@ public class portada extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         botonCrear.setBackground(new java.awt.Color(179, 57, 170));
-        botonCrear.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        botonCrear.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         botonCrear.setForeground(new java.awt.Color(255, 255, 255));
         botonCrear.setText("Crear Receta");
         botonCrear.setBorderPainted(false);
         jPanel1.add(botonCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 710, 200, 50));
 
         botonLista1.setBackground(new java.awt.Color(252, 167, 46));
-        botonLista1.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        botonLista1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         botonLista1.setForeground(new java.awt.Color(255, 255, 255));
         botonLista1.setText("Ver recetas");
         botonLista1.setBorderPainted(false);
