@@ -6,6 +6,7 @@ package vistas;
 
 import controladores.Miscelanea;
 import controladores.RecetaJpaController;
+import entidades.Ingrediente;
 import entidades.Receta;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +20,16 @@ public class PaginaLista extends javax.swing.JFrame {
 
     private List<Receta> listaRecetas;
     RecetaJpaController controladorReceta = new RecetaJpaController(Miscelanea.getEntityManager());
+    public List<Ingrediente> listaIngredientes;
 
     /**
      * Creates new form PaginaLista
      */
     public PaginaLista() {
         listaRecetas = new ArrayList<>();
+        listaIngredientes=new ArrayList<>();
         initComponents();
+        panelVerReceta.setVisible(false);
         cargarRecetas();
     }
 
@@ -47,24 +51,22 @@ public class PaginaLista extends javax.swing.JFrame {
         botonCrear1 = new javax.swing.JButton();
         ver = new javax.swing.JButton();
         panelVerReceta = new javax.swing.JPanel();
-        crearBotonDeleteIngrediente = new javax.swing.JLabel();
-        nombreRecetaVer = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        panelCrear = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        botonCrear = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        elaboracionPanel = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        nombreRecetaEditable = new javax.swing.JTextField();
-        crearBotonAddIngrediente = new javax.swing.JButton();
-        panelIngredientes = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
-        botonLimpiar = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        botonDeleteI = new javax.swing.JButton();
+        botonAddI = new javax.swing.JButton();
+        botonCrear2 = new javax.swing.JButton();
+        LabelVerReceta = new javax.swing.JLabel();
+        jLabelReceta = new javax.swing.JLabel();
+        jLabelCreaReceta = new javax.swing.JLabel();
+        jLabelEditaReceta = new javax.swing.JLabel();
         indiceLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -73,7 +75,7 @@ public class PaginaLista extends javax.swing.JFrame {
 
         jList1.setBackground(new java.awt.Color(238, 244, 238));
         jList1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jList1.setFont(new java.awt.Font("Victorian Parlor Vintage Italic", 0, 24)); // NOI18N
+        jList1.setFont(new java.awt.Font("Victorian Parlor Vintage Italic", 0, 36)); // NOI18N
         jList1.setForeground(new java.awt.Color(48, 23, 81));
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -146,92 +148,27 @@ public class PaginaLista extends javax.swing.JFrame {
         panelVerReceta.setOpaque(false);
         panelVerReceta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        crearBotonDeleteIngrediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/verReceta.png"))); // NOI18N
-        crearBotonDeleteIngrediente.setToolTipText("");
-        panelVerReceta.add(crearBotonDeleteIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1520, 980));
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
+        jScrollPane2.setForeground(new java.awt.Color(0, 102, 153));
+        jScrollPane2.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
 
-        nombreRecetaVer.setFont(new java.awt.Font("Purisa", 1, 24)); // NOI18N
-        nombreRecetaVer.setForeground(new java.awt.Color(0, 102, 153));
-        panelVerReceta.add(nombreRecetaVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 148, 510, 40));
-
-        jScrollPane1.setBackground(new java.awt.Color(238, 244, 238));
-        jScrollPane1.setForeground(new java.awt.Color(0, 102, 153));
-
-        jTextArea2.setBackground(new java.awt.Color(238, 244, 238));
-        jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Purisa", 1, 18)); // NOI18N
-        jTextArea2.setForeground(new java.awt.Color(0, 102, 153));
-        jTextArea2.setRows(5);
-        jScrollPane1.setViewportView(jTextArea2);
-
-        panelVerReceta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 530, 500, 330));
-
-        jPanel1.add(panelVerReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1520, 980));
-
-        panelCrear.setOpaque(false);
-        panelCrear.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/creaRecetas.png"))); // NOI18N
-        panelCrear.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1520, 980));
-
-        botonCrear.setBackground(new java.awt.Color(179, 57, 170));
-        botonCrear.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonCrear.setForeground(new java.awt.Color(255, 255, 255));
-        botonCrear.setText("+");
-        botonCrear.setBorderPainted(false);
-        botonCrear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCrearActionPerformed(evt);
-            }
-        });
-        panelCrear.add(botonCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 880, 60, 50));
-
-        jButton1.setBackground(new java.awt.Color(252, 167, 46));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("-");
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        panelCrear.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 390, 50, 40));
-
-        elaboracionPanel.setBackground(new java.awt.Color(238, 244, 238));
-        elaboracionPanel.setToolTipText("");
-
+        jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(238, 244, 238));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(0, 102, 153));
+        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("sadsd");
-        jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        elaboracionPanel.setViewportView(jTextArea1);
+        jScrollPane2.setViewportView(jTextArea1);
 
-        panelCrear.add(elaboracionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 720, 500, 140));
+        panelVerReceta.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 510, 490, 350));
 
-        nombreRecetaEditable.setBackground(new java.awt.Color(238, 244, 238));
-        nombreRecetaEditable.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
-        nombreRecetaEditable.setForeground(new java.awt.Color(0, 102, 153));
-        nombreRecetaEditable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
-        nombreRecetaEditable.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        nombreRecetaEditable.setSelectionColor(new java.awt.Color(0, 102, 153));
-        panelCrear.add(nombreRecetaEditable, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 330, 490, 40));
-
-        crearBotonAddIngrediente.setBackground(new java.awt.Color(179, 57, 170));
-        crearBotonAddIngrediente.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        crearBotonAddIngrediente.setForeground(new java.awt.Color(255, 255, 255));
-        crearBotonAddIngrediente.setText("+");
-        crearBotonAddIngrediente.setBorderPainted(false);
-        panelCrear.add(crearBotonAddIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 390, 50, 40));
-
-        panelIngredientes.setBackground(new java.awt.Color(238, 244, 238));
-        panelIngredientes.setForeground(new java.awt.Color(0, 102, 153));
+        jScrollPane1.setBackground(new java.awt.Color(238, 244, 238));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
+        jScrollPane1.setForeground(new java.awt.Color(0, 102, 153));
 
         jList2.setBackground(new java.awt.Color(238, 244, 238));
-        jList2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jList2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
         jList2.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
         jList2.setForeground(new java.awt.Color(0, 102, 153));
         jList2.setModel(new javax.swing.AbstractListModel<String>() {
@@ -239,29 +176,78 @@ public class PaginaLista extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        panelIngredientes.setViewportView(jList2);
+        jList2.setSelectionForeground(new java.awt.Color(238, 244, 238));
+        jScrollPane1.setViewportView(jList2);
 
-        panelCrear.add(panelIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 450, 500, 200));
+        panelVerReceta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 280, 500, 170));
 
-        botonLimpiar.setBackground(new java.awt.Color(252, 167, 46));
-        botonLimpiar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        botonLimpiar.setText("Limpiar");
-        botonLimpiar.setBorderPainted(false);
-        botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        jTextField1.setBackground(new java.awt.Color(238, 244, 238));
+        jTextField1.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(0, 102, 153));
+        jTextField1.setText("jTextField1");
+        jTextField1.setToolTipText("");
+        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
+        jTextField1.setCaretColor(new java.awt.Color(238, 244, 238));
+        jTextField1.setDisabledTextColor(new java.awt.Color(0, 102, 153));
+        jTextField1.setFocusable(false);
+        jTextField1.setOpaque(true);
+        jTextField1.setSelectedTextColor(new java.awt.Color(238, 244, 238));
+        jTextField1.setVerifyInputWhenFocusTarget(false);
+        panelVerReceta.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 127, 490, 50));
+
+        botonDeleteI.setBackground(new java.awt.Color(252, 167, 46));
+        botonDeleteI.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonDeleteI.setForeground(new java.awt.Color(255, 255, 255));
+        botonDeleteI.setText("-");
+        botonDeleteI.setBorderPainted(false);
+        botonDeleteI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLimpiarActionPerformed(evt);
+                botonDeleteIActionPerformed(evt);
             }
         });
-        panelCrear.add(botonLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 880, 110, 50));
+        panelVerReceta.add(botonDeleteI, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 220, 40, 40));
 
-        jPanel1.add(panelCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1520, 980));
+        botonAddI.setBackground(new java.awt.Color(179, 57, 170));
+        botonAddI.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonAddI.setForeground(new java.awt.Color(255, 255, 255));
+        botonAddI.setText("+");
+        botonAddI.setBorderPainted(false);
+        botonAddI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAddIActionPerformed(evt);
+            }
+        });
+        panelVerReceta.add(botonAddI, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 220, 40, 40));
+
+        botonCrear2.setBackground(new java.awt.Color(179, 57, 170));
+        botonCrear2.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonCrear2.setForeground(new java.awt.Color(255, 255, 255));
+        botonCrear2.setText("Crear Receta");
+        botonCrear2.setBorderPainted(false);
+        botonCrear2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrear2ActionPerformed(evt);
+            }
+        });
+        panelVerReceta.add(botonCrear2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 880, 150, 50));
+
+        LabelVerReceta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/verReceta.png"))); // NOI18N
+        LabelVerReceta.setToolTipText("");
+        panelVerReceta.add(LabelVerReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 690, 980));
+
+        jLabelReceta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/receta.png"))); // NOI18N
+        panelVerReceta.add(jLabelReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 480, 90));
+
+        jLabelCreaReceta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/creaReceta.png"))); // NOI18N
+        panelVerReceta.add(jLabelCreaReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 480, 90));
+
+        jLabelEditaReceta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editaReceta.png"))); // NOI18N
+        panelVerReceta.add(jLabelEditaReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 480, 90));
+
+        jPanel1.add(panelVerReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1520, 980));
 
         indiceLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/indice.png"))); // NOI18N
         jPanel1.add(indiceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1520, 980));
-
-        panelVerReceta.setVisible(true);
-        panelCrear.setVisible(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -278,18 +264,31 @@ public class PaginaLista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verActionPerformed
-      int index = jList1.getAnchorSelectionIndex();
-      panelCrear.setVisible(false);
-      panelVerReceta.setVisible(true);
-      nombreRecetaVer.setText(listaRecetas.get(index).getNombreReceta());
-      jTextArea2.setText(listaRecetas.get(index).getElaboracion());
+        int index = jList1.getAnchorSelectionIndex();
+        botonAddI.setVisible(false);
+        botonDeleteI.setVisible(false);
+        cargarReceta(index);
     }//GEN-LAST:event_verActionPerformed
+
+    private void cargarReceta(int index) {
+        panelVerReceta.setVisible(true);
+        jTextField1.setText(listaRecetas.get(index).getNombreReceta());
+        jTextArea1.setText(listaRecetas.get(index).getElaboracion());
+        String[] listaNombresIngredientes = listaRecetas.get(index).getCantidadList().stream().map((t) -> t.getIngrediente().getNombreIngrediente()).toList().toArray(new String[listaRecetas.get(index).getCantidadList().size()]);
+        jList2.setListData(listaNombresIngredientes);
+         botonAddI.setVisible(false);
+        botonDeleteI.setVisible(false);
+        jTextField1.setFocusable(false);
+        jTextArea1.setEditable(false);
+        jLabelReceta.setVisible(true);
+        jLabelCreaReceta.setVisible(false);
+        jLabelEditaReceta.setVisible(false);
+        botonCrear2.setVisible(false);
+    }
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
 
         int index = jList1.getAnchorSelectionIndex();
-
-        jList1.clearSelection();
         if (index != -1
                 && JOptionPane.showConfirmDialog(null, "Seguro que deseas borrar la receta %s".formatted(listaRecetas.get(index).getNombreReceta())) == 0) {
             try {
@@ -301,37 +300,49 @@ public class PaginaLista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonBorrarActionPerformed
 
-    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
-      panelCrear.setVisible(true);
-      panelVerReceta.setVisible(false);
-    }//GEN-LAST:event_botonCrearActionPerformed
-
     private void botonLEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLEditar1ActionPerformed
-      panelCrear.setVisible(true);
-      panelVerReceta.setVisible(false);
-      int index = jList1.getAnchorSelectionIndex();
-      jList1.clearSelection();
-      nombreRecetaEditable.setText(listaRecetas.get(index).getNombreReceta());
-      String[] listaNombres = listaRecetas.stream().map((t) -> t.getNombreReceta()).toList().toArray(new String[listaRecetas.size()]);
-      String[] listaNombresIngredientes = listaRecetas.get(index).getCantidadList().stream().map((t) -> t.getIngrediente().getNombreIngrediente()).toList().toArray(new String[listaRecetas.get(index).getCantidadList().size()]);
-      jList2.setListData(listaNombresIngredientes);
-      jTextArea1.setText(listaRecetas.get(index).getElaboracion());
+        int index = jList1.getAnchorSelectionIndex();
+        cargarReceta(index);
+        botonAddI.setVisible(true);
+        botonDeleteI.setVisible(true);
+        jTextField1.setFocusable(true);
+        jTextArea1.setEditable(true);
+        jLabelReceta.setVisible(false);
+        jLabelCreaReceta.setVisible(false);
+        jLabelEditaReceta.setVisible(true);
     }//GEN-LAST:event_botonLEditar1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void botonCrear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrear1ActionPerformed
-        // TODO add your handling code here:
+
+        panelVerReceta.setVisible(true);
+        jTextField1.setText("Nombre de la receta....");
+        jTextArea1.setText("Como se elabora.....");
+        jList2.setListData(new String [0] );
+        jTextField1.setFocusable(true);
+        jTextArea1.setEditable(true);
+        botonAddI.setVisible(true);
+        botonDeleteI.setVisible(true);
+        jLabelReceta.setVisible(false);
+        jLabelCreaReceta.setVisible(true);
+        jLabelEditaReceta.setVisible(false);
+        botonCrear2.setVisible(true);
     }//GEN-LAST:event_botonCrear1ActionPerformed
 
-    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
+    private void botonDeleteIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDeleteIActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botonLimpiarActionPerformed
+    }//GEN-LAST:event_botonDeleteIActionPerformed
+
+    private void botonAddIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAddIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonAddIActionPerformed
+
+    private void botonCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrear2ActionPerformed
+      String nombreReceta= jTextField1.getText();
+      String elaboracion=jTextArea1.getText();
+      
+    }//GEN-LAST:event_botonCrear2ActionPerformed
 
     private void cargarRecetas() {
-
         listaRecetas = controladorReceta.findRecetaEntities();
         String[] listaNombresRecetas = listaRecetas.stream().map((t) -> t.getNombreReceta()).toList().toArray(new String[listaRecetas.size()]);
         jList1.setListData(listaNombresRecetas);
@@ -373,29 +384,26 @@ public class PaginaLista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelVerReceta;
+    private javax.swing.JButton botonAddI;
     private javax.swing.JButton botonAtras;
     private javax.swing.JButton botonBorrar;
-    private javax.swing.JButton botonCrear;
     private javax.swing.JButton botonCrear1;
+    private javax.swing.JButton botonCrear2;
+    private javax.swing.JButton botonDeleteI;
     private javax.swing.JButton botonLEditar1;
-    private javax.swing.JButton botonLimpiar;
-    private javax.swing.JButton crearBotonAddIngrediente;
-    private javax.swing.JLabel crearBotonDeleteIngrediente;
-    private javax.swing.JScrollPane elaboracionPanel;
     private javax.swing.JLabel indiceLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelCreaReceta;
+    private javax.swing.JLabel jLabelEditaReceta;
+    private javax.swing.JLabel jLabelReceta;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField nombreRecetaEditable;
-    private javax.swing.JLabel nombreRecetaVer;
-    private javax.swing.JPanel panelCrear;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JScrollPane panelIndice;
-    private javax.swing.JScrollPane panelIngredientes;
     private javax.swing.JPanel panelVerReceta;
     private javax.swing.JButton ver;
     // End of variables declaration//GEN-END:variables

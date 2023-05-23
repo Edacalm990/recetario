@@ -47,6 +47,11 @@ public class portada extends javax.swing.JFrame {
         botonLista1.setForeground(new java.awt.Color(255, 255, 255));
         botonLista1.setText("Ver recetas");
         botonLista1.setBorderPainted(false);
+        botonLista1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLista1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 590, 200, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/portada.png"))); // NOI18N
@@ -65,6 +70,14 @@ public class portada extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista1ActionPerformed
+        PaginaLista paginaPrincipal= new PaginaLista();
+        paginaPrincipal.pack();
+        paginaPrincipal.setLocationRelativeTo(null);
+        paginaPrincipal.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_botonLista1ActionPerformed
 
     /**
      * @param args the command line arguments

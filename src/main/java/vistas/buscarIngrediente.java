@@ -4,14 +4,18 @@
  */
 package vistas;
 
+import controladores.IngredienteJpaController;
+import controladores.Miscelanea;
+import controladores.RecetaJpaController;
 import entidades.Ingrediente;
+import java.util.List;
 
 /**
  *
  * @author venganzaalchocolate
  */
 public class buscarIngrediente extends javax.swing.JFrame {
-
+     IngredienteJpaController controladorIngrediente = new IngredienteJpaController(Miscelanea.getEntityManager());
     /**
      * Creates new form buscarIngrediente
      */
@@ -70,6 +74,11 @@ public class buscarIngrediente extends javax.swing.JFrame {
         botonLista1.setForeground(new java.awt.Color(255, 255, 255));
         botonLista1.setText("+");
         botonLista1.setBorderPainted(false);
+        botonLista1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLista1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, 60, 50));
 
         botonLista2.setBackground(new java.awt.Color(252, 167, 46));
@@ -121,12 +130,18 @@ public class buscarIngrediente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonLista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista2ActionPerformed
-        // TODO add your handling code here:
+       List<Ingrediente> listaBusqueda= controladorIngrediente.findIngredienteEntities().stream().filter((t) -> t.getNombreIngrediente().contains( jTextField1.getText())).toList();
+       
+        
     }//GEN-LAST:event_botonLista2ActionPerformed
 
     private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
-        CrearReceta.ingrediente=new Ingrediente();
+        //CrearReceta.ingrediente=new Ingrediente();
     }//GEN-LAST:event_botonLista3ActionPerformed
+
+    private void botonLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonLista1ActionPerformed
 
     /**
      * @param args the command line arguments
