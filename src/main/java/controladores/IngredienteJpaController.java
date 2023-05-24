@@ -13,6 +13,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Cantidad;
 import entidades.Ingrediente;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -198,5 +200,21 @@ public class IngredienteJpaController implements Serializable {
             em.close();
         }
     }
+    
+         // Método añadido, usando una named query de la entidad ingrediente
+    public Ingrediente findByNombreIngrediente(String nombre){
+        EntityManager em = getEntityManager();
+        // Se crea la query usando el nombre de la named query
+        Query q = em.createNamedQuery("Ingrediente.findByNombreIngrediente");
+        // Se establece el parámetro de la consulta
+        q.setParameter("nombreIngrediente", nombre);
+
+        
+        return (Ingrediente)q.getSingleResult();
+    }
+    
+            
+     
+    
     
 }

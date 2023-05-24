@@ -28,6 +28,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "Ingrediente.findAll", query = "SELECT i FROM Ingrediente i"),
     @NamedQuery(name = "Ingrediente.findByCodIngrediente", query = "SELECT i FROM Ingrediente i WHERE i.codIngrediente = :codIngrediente"),
     @NamedQuery(name = "Ingrediente.findByNombreIngrediente", query = "SELECT i FROM Ingrediente i WHERE i.nombreIngrediente = :nombreIngrediente")})
+    // namedQuery creada por mi
+ 
 public class Ingrediente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,12 +47,9 @@ public class Ingrediente implements Serializable {
     public Ingrediente() {
     }
 
-    public Ingrediente(Integer codIngrediente) {
-        this.codIngrediente = codIngrediente;
-    }
+  
 
-    public Ingrediente(Integer codIngrediente, String nombreIngrediente) {
-        this.codIngrediente = codIngrediente;
+    public Ingrediente(String nombreIngrediente) {
         this.nombreIngrediente = nombreIngrediente;
     }
 

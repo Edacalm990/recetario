@@ -228,4 +228,22 @@ public class RecetaJpaController implements Serializable {
         }
     }
     
+    // Receta.findByNombreReceta
+      // Método añadido, usando una named query de la entidad ingrediente
+    public Receta findByNombreReceta(String nombre){
+        EntityManager em = getEntityManager();
+        // Se crea la query usando el nombre de la named query
+        Query q = em.createNamedQuery("Receta.findByNombreReceta");
+        // Se establece el parámetro de la consulta
+        q.setParameter("nombreReceta", nombre);
+        try {
+            Object tmp =q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+        
+        return (Receta)q.getSingleResult();
+    }
+         
+    
 }

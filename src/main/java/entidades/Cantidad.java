@@ -53,8 +53,11 @@ public class Cantidad implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Cantidad(int codReceta, int codIngrediente) {
-        this.cantidadPK = new CantidadPK(codReceta, codIngrediente);
+    public Cantidad(Ingrediente ingrediente, Receta receta, int cantidad) {
+        this.cantidadPK = new CantidadPK(ingrediente.getCodIngrediente(), receta.getCodReceta());
+        this.ingrediente=ingrediente;
+        this.receta=receta;
+        this.cantidad=cantidad;
     }
 
     public CantidadPK getCantidadPK() {

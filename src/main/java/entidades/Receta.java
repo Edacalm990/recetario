@@ -31,6 +31,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Receta.findByCodReceta", query = "SELECT r FROM Receta r WHERE r.codReceta = :codReceta"),
     @NamedQuery(name = "Receta.findByNombreReceta", query = "SELECT r FROM Receta r WHERE r.nombreReceta = :nombreReceta"),
     @NamedQuery(name = "Receta.findByElaboracion", query = "SELECT r FROM Receta r WHERE r.elaboracion = :elaboracion")})
+
 public class Receta implements Serializable {
 
     private static final long serialVersionUID = 1L;
