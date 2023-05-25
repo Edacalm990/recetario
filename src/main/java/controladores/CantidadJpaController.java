@@ -193,6 +193,7 @@ public class CantidadJpaController implements Serializable {
             em.close();
         }
     }
+    
 
     public int getCantidadCount() {
         EntityManager em = getEntityManager();

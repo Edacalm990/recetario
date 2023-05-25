@@ -30,7 +30,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Receta.findAll", query = "SELECT r FROM Receta r"),
     @NamedQuery(name = "Receta.findByCodReceta", query = "SELECT r FROM Receta r WHERE r.codReceta = :codReceta"),
     @NamedQuery(name = "Receta.findByNombreReceta", query = "SELECT r FROM Receta r WHERE r.nombreReceta = :nombreReceta"),
-    @NamedQuery(name = "Receta.findByElaboracion", query = "SELECT r FROM Receta r WHERE r.elaboracion = :elaboracion")})
+    @NamedQuery(name = "Receta.findByElaboracion", query = "SELECT r FROM Receta r WHERE r.elaboracion = :elaboracion"),
+    @NamedQuery(name = "Receta.findByCreador", query = "SELECT r FROM Receta r WHERE r.creador = :creador")
+})
 
 public class Receta implements Serializable {
 
@@ -125,7 +127,19 @@ public class Receta implements Serializable {
 
     @Override
     public String toString() {
-        return "%s".formatted(this.nombreReceta);
+        String tmp= "";
+        for (Cantidad cantidad : cantidadList) {
+            tmp+=cantidad.toString();
+            tmp+="\n";
+        }
+        
+        return  """
+                %s
+                %s
+                %s
+                %s
+                %s
+                """.formatted(this.codReceta, this.nombreReceta, this.creador, tmp,this.elaboracion);
     }
     
     public String toStringCompleto() {

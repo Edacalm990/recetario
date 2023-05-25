@@ -43,10 +43,10 @@ public class CrearIngrediente extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBackground(new java.awt.Color(255, 254, 223));
+        jTextField1.setBackground(new java.awt.Color(238, 244, 238));
         jTextField1.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(0, 102, 153));
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 254, 223)));
+        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
         jTextField1.setSelectedTextColor(new java.awt.Color(255, 255, 255));
         jTextField1.setSelectionColor(new java.awt.Color(0, 102, 153));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 490, 40));

@@ -244,6 +244,24 @@ public class RecetaJpaController implements Serializable {
         
         return (Receta)q.getSingleResult();
     }
+    
+        // Receta.findByNombreReceta
+      // Método añadido, usando una named query de la entidad ingrediente
+    public Receta findByCreador(Usuario usuario){
+        EntityManager em = getEntityManager();
+        // Se crea la query usando el nombre de la named query
+        Query q = em.createNamedQuery("Receta.findByCreador");
+        // Se establece el parámetro de la consulta
+        q.setParameter("creador", usuario.getCodUsuario());
+        try {
+            Object tmp =q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+        
+        return (Receta)q.getSingleResult();
+    }
+         
          
     
 }

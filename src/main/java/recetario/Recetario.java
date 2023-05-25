@@ -5,13 +5,20 @@
 
 package recetario;
 
+import entidades.Usuario;
+import vistas.Portada;
+import vistas.SeleccionarUsuario;
+
 /**
  *
  * @author venganzaalchocolate
  */
 public class Recetario {
-
+    public static Usuario usuario=new Usuario();
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        SeleccionarUsuario portada= new SeleccionarUsuario();
+        portada.pack();
+        portada.setLocationRelativeTo(null);
+        portada.setVisible(true);
     }
 }

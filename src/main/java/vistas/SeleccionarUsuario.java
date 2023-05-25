@@ -4,34 +4,45 @@
  */
 package vistas;
 
+import controladores.CantidadJpaController;
 import controladores.IngredienteJpaController;
 import controladores.Miscelanea;
 import controladores.RecetaJpaController;
+import controladores.UsuarioJpaController;
+import entidades.Cantidad;
 import entidades.ChildWindow;
 import entidades.Ingrediente;
+import entidades.Receta;
+import entidades.Usuario;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
+import recetario.Recetario;
 
 /**
  *
  * @author venganzaalchocolate
  */
-public class BuscarIngrediente extends ChildWindow {
+public class SeleccionarUsuario extends javax.swing.JFrame {
 
+    UsuarioJpaController controladorUsuario = new UsuarioJpaController(Miscelanea.getEntityManager());
+    RecetaJpaController controladorReceta = new RecetaJpaController(Miscelanea.getEntityManager());
+    CantidadJpaController controladorCantidad = new CantidadJpaController(Miscelanea.getEntityManager());
     IngredienteJpaController controladorIngrediente = new IngredienteJpaController(Miscelanea.getEntityManager());
-    List<Ingrediente> listaBusqueda;
+    List<Usuario> listaBusqueda;
+    List<Receta> listaRecetas;
 
     /**
      * Creates new form buscarIngrediente
      */
-
-    public BuscarIngrediente(PaginaLista mainWindow, String windowName) {
-        super(mainWindow, windowName);
+    public SeleccionarUsuario() {
         listaBusqueda = new ArrayList<>();
+        listaRecetas = new ArrayList<>();
         initComponents();
+        cargarUsuarios();
     }
 
     /**
@@ -44,12 +55,9 @@ public class BuscarIngrediente extends ChildWindow {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        botonLista5 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         botonLista1 = new javax.swing.JButton();
-        botonLista2 = new javax.swing.JButton();
         botonLista4 = new javax.swing.JButton();
         botonLista3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -57,26 +65,6 @@ public class BuscarIngrediente extends ChildWindow {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        botonLista5.setBackground(new java.awt.Color(252, 167, 46));
-        botonLista5.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        botonLista5.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista5.setText("<-");
-        botonLista5.setBorderPainted(false);
-        botonLista5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista5ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(botonLista5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 440, 70, 50));
-
-        jTextField1.setBackground(new java.awt.Color(238, 244, 238));
-        jTextField1.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 102, 153));
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
-        jTextField1.setSelectedTextColor(new java.awt.Color(255, 255, 255));
-        jTextField1.setSelectionColor(new java.awt.Color(0, 102, 153));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 490, 30));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
         jScrollPane1.setForeground(new java.awt.Color(0, 102, 153));
@@ -87,7 +75,7 @@ public class BuscarIngrediente extends ChildWindow {
         jList1.setForeground(new java.awt.Color(0, 102, 153));
         jScrollPane1.setViewportView(jList1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 510, 210));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 510, 300));
 
         botonLista1.setBackground(new java.awt.Color(179, 57, 170));
         botonLista1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
@@ -101,18 +89,6 @@ public class BuscarIngrediente extends ChildWindow {
             }
         });
         jPanel1.add(botonLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 60, 50));
-
-        botonLista2.setBackground(new java.awt.Color(252, 167, 46));
-        botonLista2.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        botonLista2.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista2.setText("Buscar");
-        botonLista2.setBorderPainted(false);
-        botonLista2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(botonLista2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 140, 50));
 
         botonLista4.setBackground(new java.awt.Color(252, 167, 46));
         botonLista4.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
@@ -129,7 +105,7 @@ public class BuscarIngrediente extends ChildWindow {
         botonLista3.setBackground(new java.awt.Color(179, 57, 170));
         botonLista3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         botonLista3.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista3.setText("Añadir");
+        botonLista3.setText("Aceptar");
         botonLista3.setBorderPainted(false);
         botonLista3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +114,7 @@ public class BuscarIngrediente extends ChildWindow {
         });
         jPanel1.add(botonLista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 130, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/seleccionarUsuario.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 510));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,75 +131,95 @@ public class BuscarIngrediente extends ChildWindow {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonLista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista2ActionPerformed
-        cargarIngredientes();
-    }//GEN-LAST:event_botonLista2ActionPerformed
-
-    private void cargarIngredientes() {
+    private void cargarUsuarios() {
         jList1.setSelectedIndex(-1);
-        listaBusqueda = controladorIngrediente.findIngredienteEntities().stream().filter((t) -> t.getNombreIngrediente().contains(jTextField1.getText().toLowerCase())).toList();
-        String[] listaIngredientesString = listaBusqueda.stream().map((t) -> t.getNombreIngrediente()).toList().toArray(new String[listaBusqueda.size()]);
+        listaBusqueda = controladorUsuario.findUsuarioEntities();
+        String[] listaIngredientesString = listaBusqueda.stream().map((t) -> "%s %s %s".formatted(t.getNombre(), t.getApellido1(), (t.getApellido2() != null) ? t.getApellido2() : "")).toList().toArray(new String[listaBusqueda.size()]);
         jList1.setListData(listaIngredientesString);
 
     }
 
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SeleccionarUsuario().setVisible(true);
+                
+            }
+        });
+    }
+
+
     private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
         int index = jList1.getAnchorSelectionIndex();
         jList1.setSelectedIndex(-1);
-        if (index != -1
-                && !PaginaLista.listaIngredientes.contains(listaBusqueda.get(index))
-                && JOptionPane.showConfirmDialog(null, "Seguro que deseas añadir el ingrediente %s".formatted(listaBusqueda.get(index).getNombreIngrediente())) == 0) {
-            try {
-                PaginaLista.listaCantidades.add(pedirCantidad());
-                PaginaLista.listaIngredientes.add(listaBusqueda.get(index));
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "No se ha podido borrar añadir el ingrediente %s".formatted(e));
-            }
-        } else if (index==-1){
-          JOptionPane.showMessageDialog(null, "Debes seleccionar un ingrediente");
+        if (index != -1) {
+            Recetario.usuario = listaBusqueda.get(index);
+            Portada portada=new Portada();
+             portada.pack();
+             portada.setLocationRelativeTo(null);
+             portada.setVisible(true);
+             dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "La receta ya tiene ese ingrediente");
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un usuario");
         }
     }//GEN-LAST:event_botonLista3ActionPerformed
 
-    private int pedirCantidad() {
-        boolean condicion = true;
-        do {
-            try {
-            String cantidad = JOptionPane.showInputDialog("Cantidad ?");
-            int cantidadI= Integer.parseInt(cantidad);
-            condicion=false;
-            return cantidadI;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Debes poner un número entero");
-            }
-        } while (condicion);
-        return 0;
-    }
-
     private void botonLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista1ActionPerformed
-        CrearIngrediente ventanaCrearIngrediente = new CrearIngrediente();
-        ventanaCrearIngrediente.pack();
-        ventanaCrearIngrediente.setLocationRelativeTo(null);
-        ventanaCrearIngrediente.setVisible(true);
+//        CrearIngrediente ventanaCrearIngrediente = new CrearIngrediente();
+//        ventanaCrearIngrediente.pack();
+//        ventanaCrearIngrediente.setLocationRelativeTo(null);
+//        ventanaCrearIngrediente.setVisible(true);
     }//GEN-LAST:event_botonLista1ActionPerformed
 
     private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed
         int index = jList1.getAnchorSelectionIndex();
         if (index != -1
-                && JOptionPane.showConfirmDialog(null, "Seguro que deseas borrar el ingrediente %s".formatted(listaBusqueda.get(index).getNombreIngrediente())) == 0) {
+                && JOptionPane.showConfirmDialog(null, "Seguro que deseas borrar el usuario %s, esto eliminará todas sus recetas".formatted(listaBusqueda.get(index).getNombre())) == 0) {
             try {
-                controladorIngrediente.destroy(listaBusqueda.get(index).getCodIngrediente());
-                cargarIngredientes();
+                listaRecetas = controladorReceta.findRecetaEntities();
+                List<Receta> recetasCreador = listaRecetas.stream().filter((t) -> t.getCreador().equals(listaBusqueda.get(index))).toList();
+                for (Receta receta : recetasCreador) {
+                    try {
+                        for (int i = 0; i < receta.getCantidadList().size(); i++) {
+                            Cantidad get = receta.getCantidadList().get(i);
+                            controladorCantidad.destroy(get.getCantidadPK());
+                        }
+                        controladorReceta.destroy(receta.getCodReceta());
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "No se ha podido borrar la receta, %s".formatted(e));
+                    }
+                }
+                controladorUsuario.destroy(listaBusqueda.get(index).getCodUsuario());
+                cargarUsuarios();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "No se ha podido borrar el ingrediente %s".formatted(e));
+                JOptionPane.showMessageDialog(null, "No se ha podido borrar el usuario %s".formatted(e));
             }
         }
     }//GEN-LAST:event_botonLista4ActionPerformed
-
-    private void botonLista5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista5ActionPerformed
-        dispose();
-    }//GEN-LAST:event_botonLista5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,14 +227,11 @@ public class BuscarIngrediente extends ChildWindow {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonLista1;
-    private javax.swing.JButton botonLista2;
     private javax.swing.JButton botonLista3;
     private javax.swing.JButton botonLista4;
-    private javax.swing.JButton botonLista5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

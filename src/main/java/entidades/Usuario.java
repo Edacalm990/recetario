@@ -54,14 +54,18 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Integer codUsuario) {
-        this.codUsuario = codUsuario;
-    }
-
-    public Usuario(Integer codUsuario, String nombre, String apellido1) {
-        this.codUsuario = codUsuario;
+    public Usuario(String nombre, String apellido1, String apellido2, String email) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
+        this.apellido2=apellido2;
+        this.email=email;
+    }
+    
+    public Usuario(String nombre, String apellido1, String email) {
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2=apellido2;
+        this.email=email;
     }
 
     public Integer getCodUsuario() {
