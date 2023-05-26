@@ -16,7 +16,7 @@ import vistas.SeleccionarUsuario;
 public class Recetario {
     public static Usuario usuario=new Usuario();
     public static void main(String[] args) {
-        SeleccionarUsuario portada= new SeleccionarUsuario();
+        Portada portada= new Portada();
         portada.pack();
         portada.setLocationRelativeTo(null);
         portada.setVisible(true);

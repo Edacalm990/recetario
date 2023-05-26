@@ -86,10 +86,10 @@ public class PaginaLista extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelIndice.setBackground(new java.awt.Color(255, 254, 233));
-        panelIndice.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        panelIndice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
 
         jList1.setBackground(new java.awt.Color(238, 244, 238));
-        jList1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jList1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
         jList1.setFont(new java.awt.Font("Victorian Parlor Vintage Italic", 0, 36)); // NOI18N
         jList1.setForeground(new java.awt.Color(48, 23, 81));
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -412,7 +412,6 @@ public class PaginaLista extends javax.swing.JFrame {
 
     private void botonDeleteIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDeleteIActionPerformed
         int index = jList2.getAnchorSelectionIndex();
-        System.out.println(index);
         jList2.setSelectedIndex(-1);
         if (index != -1) {
 

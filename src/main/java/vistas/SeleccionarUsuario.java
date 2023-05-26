@@ -14,6 +14,7 @@ import entidades.ChildWindow;
 import entidades.Ingrediente;
 import entidades.Receta;
 import entidades.Usuario;
+import java.awt.event.WindowEvent;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,13 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(576, 499));
+        setPreferredSize(new java.awt.Dimension(576, 500));
+        setResizable(false);
+        setSize(new java.awt.Dimension(576, 499));
 
+        jPanel1.setMinimumSize(new java.awt.Dimension(576, 500));
+        jPanel1.setPreferredSize(new java.awt.Dimension(576, 510));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
@@ -75,7 +82,7 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
         jList1.setForeground(new java.awt.Color(0, 102, 153));
         jScrollPane1.setViewportView(jList1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 510, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 230, 270));
 
         botonLista1.setBackground(new java.awt.Color(179, 57, 170));
         botonLista1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
@@ -88,7 +95,7 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
                 botonLista1ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 60, 50));
+        jPanel1.add(botonLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 60, 50));
 
         botonLista4.setBackground(new java.awt.Color(252, 167, 46));
         botonLista4.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
@@ -100,7 +107,7 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
                 botonLista4ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 60, 50));
+        jPanel1.add(botonLista4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 60, 50));
 
         botonLista3.setBackground(new java.awt.Color(179, 57, 170));
         botonLista3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
@@ -112,10 +119,11 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
                 botonLista3ActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 130, 50));
+        jPanel1.add(botonLista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 130, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/seleccionarUsuario.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 510));
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 510));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,22 +154,24 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
         if (index != -1) {
             Recetario.usuario = listaBusqueda.get(index);
             System.out.println(Recetario.usuario.toString());
-            Portada portada=new Portada();
-             portada.pack();
-             portada.setLocationRelativeTo(null);
-             portada.setVisible(true);
-             dispose();
+            Portada portada = new Portada();
+            portada.pack();
+            portada.setLocationRelativeTo(null);
+            portada.setVisible(true);
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Debes seleccionar un usuario");
         }
     }//GEN-LAST:event_botonLista3ActionPerformed
 
     private void botonLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista1ActionPerformed
-//        CrearIngrediente ventanaCrearIngrediente = new CrearIngrediente();
-//        ventanaCrearIngrediente.pack();
-//        ventanaCrearIngrediente.setLocationRelativeTo(null);
-//        ventanaCrearIngrediente.setVisible(true);
+        CrearUsuario crearUsuario = new CrearUsuario();
+        crearUsuario.pack();
+        crearUsuario.setLocationRelativeTo(null);
+        crearUsuario.setVisible(true);
+        dispose();
     }//GEN-LAST:event_botonLista1ActionPerformed
+
 
     private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed
         int index = jList1.getAnchorSelectionIndex();
