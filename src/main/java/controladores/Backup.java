@@ -1,5 +1,9 @@
 package controladores;
 
+import entidades.Cantidad;
+import entidades.Ingrediente;
+import entidades.Receta;
+import entidades.Usuario;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.AccessDeniedException;
@@ -8,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -80,6 +85,41 @@ public class Backup {
                     StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException ex) {
             System.out.println("Error creando el fichero");
+            System.out.println(ex);
         }
     }
+    
+    public static List<String> tranformarListaReceta(List<Receta> lista){
+        List<String> tmp=new ArrayList<>();
+        for (Receta receta : lista) {
+            tmp.add(receta.toString());
+        }
+    return tmp;
+    }
+    
+    public static List<String> tranformarListaIngrediente(List<Ingrediente> lista){
+        List<String> tmp=new ArrayList<>();
+        for (Ingrediente receta : lista) {
+            tmp.add(receta.toString());
+        }
+    return tmp;
+    }
+    
+    public static List<String> tranformarListaUsuario(List<Usuario> lista){
+        List<String> tmp=new ArrayList<>();
+        for (Usuario receta : lista) {
+            tmp.add(receta.toString());
+        }
+    return tmp;
+    }
+    
+    public static List<String> tranformarCantidad(List<Cantidad> lista){
+        List<String> tmp=new ArrayList<>();
+        for (Cantidad receta : lista) {
+            tmp.add(receta.toString());
+        }
+    return tmp;
+    }
+    
+    
 }

@@ -5,9 +5,19 @@
 package vistas;
 
 import controladores.Backup;
+import controladores.CantidadJpaController;
+import controladores.IngredienteJpaController;
+import controladores.Miscelanea;
+import controladores.RecetaJpaController;
+import controladores.UsuarioJpaController;
+import entidades.Cantidad;
+import entidades.Ingrediente;
+import entidades.Receta;
+import entidades.Usuario;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 import recetario.Recetario;
@@ -17,6 +27,11 @@ import recetario.Recetario;
  * @author venganzaalchocolate
  */
 public class Portada extends javax.swing.JFrame {
+
+    RecetaJpaController controladorReceta = new RecetaJpaController(Miscelanea.getEntityManager());
+    UsuarioJpaController controladorUsuario = new UsuarioJpaController(Miscelanea.getEntityManager());
+    CantidadJpaController controladorCantidad = new CantidadJpaController(Miscelanea.getEntityManager());
+    IngredienteJpaController controladorIngrediente = new IngredienteJpaController(Miscelanea.getEntityManager());
 
     /**
      * Creates new form portada
@@ -127,12 +142,12 @@ public class Portada extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonLista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista2ActionPerformed
-
-        if(Recetario.usuario.getCodUsuario()!=null){
-        PaginaLista recetas= new PaginaLista();
-        recetas.pack();
-        recetas.setLocationRelativeTo(null);
-        recetas.setVisible(true);
+        
+        if (Recetario.usuario.getCodUsuario() != null) {
+            PaginaLista recetas = new PaginaLista();
+            recetas.pack();
+            recetas.setLocationRelativeTo(null);
+            recetas.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Debes seleccionar un usuario");
         }
@@ -151,16 +166,37 @@ public class Portada extends javax.swing.JFrame {
     }//GEN-LAST:event_botonLista3ActionPerformed
 
     private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed
-       String fecha= LocalDate.now().toString();
-       
-       Backup.crearDirectorio("./backup");
-       Stream<Path> directorios=Backup.listarTodo("./");
-     
-       //Backup.crearDirectorios("./backup/%s".formatted(fecha));
-       
+        String fecha = LocalDate.now().toString();
+        Stream<Path> directorios = Backup.listarTodo("./");
+        List<Ingrediente> listaIngredientes = controladorIngrediente.findIngredienteEntities();
+        List<Receta> listaRecetas = controladorReceta.findRecetaEntities();
+        List<Usuario> listaUsuarios = controladorUsuario.findUsuarioEntities();
+        List<Cantidad> listaCantidades = controladorCantidad.findCantidadEntities();
+        
+        boolean existe = directorios.anyMatch((t) -> t.toString().equalsIgnoreCase("./backup"));
+        if (existe) {
+            boolean existeSubCarpeta=directorios.anyMatch((t) -> t.toString().equalsIgnoreCase("./backup/%s".formatted(fecha)));
+            if(!existeSubCarpeta){
+            Backup.crearDirectorios("./backup/%s".formatted(fecha));
+            String [] nombres = {"cantidad","ingrediente","receta","usuario"};
+            List[] listas = {
+                Backup.tranformarCantidad(listaCantidades),
+                Backup.tranformarListaIngrediente(listaIngredientes),
+                Backup.tranformarListaReceta(listaRecetas),
+                Backup.tranformarListaUsuario(listaUsuarios)};
+            for (int i = 0; i < listas.length; i++) {
+                Backup.escribirListaString(listas[i], "%s%s/%s%s".formatted("./backup/", fecha,nombres[i],".csv"));
+            }
+            } else {
+                System.out.println("Arreglar linea 191 Portada");
+            }
+            
+        } else {
+            Backup.crearDirectorio("./backup");
+        }
+        
     }//GEN-LAST:event_botonLista4ActionPerformed
 
-      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAtras;

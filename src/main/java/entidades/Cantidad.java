@@ -114,7 +114,7 @@ public class Cantidad implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Cantidad[ cantidadPK=" + cantidadPK + " ]";
+        return "%s;%s;%s".formatted(this.ingrediente.getCodIngrediente(), this.receta.getCodReceta(), this.cantidad);
     }
     
 }

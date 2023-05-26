@@ -138,7 +138,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Usuario[ codUsuario=" + codUsuario + " ]";
+        return "%s;%s;%s;%s;%s".formatted(this.codUsuario,this.nombre,this.apellido1, this.apellido2, this.email);
     }
     
 }

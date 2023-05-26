@@ -99,7 +99,7 @@ public class Ingrediente implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Ingrediente[ codIngrediente=" + codIngrediente + " ]";
+        return "%s;%s".formatted(this.codIngrediente,this.nombreIngrediente);
     }
     
 }

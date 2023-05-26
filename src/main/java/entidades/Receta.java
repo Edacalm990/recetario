@@ -127,23 +127,11 @@ public class Receta implements Serializable {
 
     @Override
     public String toString() {
-        String tmp= "";
-        for (Cantidad cantidad : cantidadList) {
-            tmp+=cantidad.toString();
-            tmp+="\n";
-        }
         
-        return  """
-                %s
-                %s
-                %s
-                %s
-                %s
-                """.formatted(this.codReceta, this.nombreReceta, this.creador, tmp,this.elaboracion);
+        
+        return  "%s;%s;%s;%s".formatted(this.codReceta,this.nombreReceta, this.elaboracion,this.creador);
     }
     
-    public String toStringCompleto() {
-        return "%s - %s - %s".formatted(this.nombreReceta, this.creador, this.elaboracion);
-    }
+    
     
 }
