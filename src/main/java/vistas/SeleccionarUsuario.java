@@ -150,9 +150,14 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
     private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
         int index = jList1.getAnchorSelectionIndex();
         jList1.setSelectedIndex(-1);
-        System.out.println(index);
         if (index != -1) {
-            Recetario.usuario = listaBusqueda.get(index);
+            try {
+                Recetario.usuario = listaBusqueda.get(index);
+            } catch ( ArrayIndexOutOfBoundsException e) {
+                // TODO TERMINAR
+                System.out.println(e);
+            }
+            
             System.out.println(Recetario.usuario.toString());
             Portada portada = new Portada();
             portada.pack();
@@ -175,6 +180,8 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
 
     private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed
         int index = jList1.getAnchorSelectionIndex();
+        jList1.setSelectedIndex(-1);
+        jList1.clearSelection();
         if (index != -1
                 && JOptionPane.showConfirmDialog(null, "Seguro que deseas borrar el usuario %s, esto eliminará todas sus recetas".formatted(listaBusqueda.get(index).getNombre())) == 0) {
             try {
@@ -193,6 +200,8 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
                 }
                 controladorUsuario.destroy(listaBusqueda.get(index).getCodUsuario());
                 cargarUsuarios();
+                Recetario.usuario=new Usuario();
+                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "No se ha podido borrar el usuario %s".formatted(e));
             }
