@@ -30,8 +30,8 @@ public class BuscarIngrediente extends ChildWindow {
 
     public BuscarIngrediente(PaginaLista mainWindow, String windowName) {
         super(mainWindow, windowName);
-        listaBusqueda = new ArrayList<>();
         initComponents();
+         listaBusqueda = new ArrayList<>();
     }
 
     /**
@@ -202,10 +202,10 @@ public class BuscarIngrediente extends ChildWindow {
     }
 
     private void botonLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista1ActionPerformed
-        CrearIngrediente ventanaCrearIngrediente = new CrearIngrediente();
-        ventanaCrearIngrediente.pack();
-        ventanaCrearIngrediente.setLocationRelativeTo(null);
-        ventanaCrearIngrediente.setVisible(true);
+        CrearIngrediente ventanaIngrediente=new CrearIngrediente();
+        ventanaIngrediente.pack();
+        ventanaIngrediente.setLocationRelativeTo(null);
+        ventanaIngrediente.setVisible(true);
     }//GEN-LAST:event_botonLista1ActionPerformed
 
     private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed

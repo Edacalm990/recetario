@@ -17,7 +17,7 @@ public class Portada extends javax.swing.JFrame {
      */
     public Portada() {
         initComponents();
-        botonLista1.setText(Recetario.usuario.getNombre());
+        botonUsuario.setText(Recetario.usuario.getNombre());
     }
 
     /**
@@ -30,7 +30,7 @@ public class Portada extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        botonLista1 = new javax.swing.JButton();
+        botonUsuario = new javax.swing.JButton();
         botonLista2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -39,17 +39,17 @@ public class Portada extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        botonLista1.setBackground(new java.awt.Color(179, 57, 170));
-        botonLista1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLista1.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista1.setText("Cambiar Usuario");
-        botonLista1.setBorderPainted(false);
-        botonLista1.addActionListener(new java.awt.event.ActionListener() {
+        botonUsuario.setBackground(new java.awt.Color(179, 57, 170));
+        botonUsuario.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        botonUsuario.setText("Usuario");
+        botonUsuario.setBorderPainted(false);
+        botonUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista1ActionPerformed(evt);
+                botonUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 660, 200, 50));
+        jPanel1.add(botonUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 660, 200, 50));
 
         botonLista2.setBackground(new java.awt.Color(252, 167, 46));
         botonLista2.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
@@ -83,14 +83,14 @@ public class Portada extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista1ActionPerformed
+    private void botonUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonUsuarioActionPerformed
         SeleccionarUsuario usuario= new SeleccionarUsuario();
         usuario.pack();
         usuario.setLocationRelativeTo(null);
         usuario.setVisible(true);
         
         dispose();
-    }//GEN-LAST:event_botonLista1ActionPerformed
+    }//GEN-LAST:event_botonUsuarioActionPerformed
 
     private void botonLista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista2ActionPerformed
         PaginaLista recetas= new PaginaLista();
@@ -105,8 +105,8 @@ public class Portada extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonLista1;
     private javax.swing.JButton botonLista2;
+    private javax.swing.JButton botonUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

@@ -426,12 +426,11 @@ public class PaginaLista extends javax.swing.JFrame {
 
 
     private void botonAddIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAddIActionPerformed
-        BuscarIngrediente ing = new BuscarIngrediente(this, "buscar ingrediente");
-        ing.pack();
-        ing.setLocationRelativeTo(null);
-        ing.setVisible(true);
-
-
+        BuscarIngrediente buscarIngrediente = new BuscarIngrediente(this, "buscaIngrediente");
+        buscarIngrediente.pack();
+        buscarIngrediente.setLocationRelativeTo(null);
+        buscarIngrediente.setVisible(true);
+        
     }//GEN-LAST:event_botonAddIActionPerformed
 
     private void botonCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrear2ActionPerformed
