@@ -446,7 +446,6 @@ public class PaginaLista extends javax.swing.JFrame {
                     receta.setCreador(Recetario.usuario);
                     // ------------------
                     controladorReceta.create(receta);
-
                     crearCantidad(receta);
                     cargarRecetas();
                     cargarReceta(listaRecetas.size() - 1);
@@ -469,6 +468,7 @@ public class PaginaLista extends javax.swing.JFrame {
     private void crearCantidad(Receta receta) {
         for (int i = 0; i < listaIngredientes.size(); i++) {
             Ingrediente get = listaIngredientes.get(i);
+            
             int cantidad = listaCantidades.get(i);
             try {
                 controladorCantidad.create(new Cantidad(get, receta, cantidad));

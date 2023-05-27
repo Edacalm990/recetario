@@ -10,14 +10,20 @@ import controladores.IngredienteJpaController;
 import controladores.Miscelanea;
 import controladores.RecetaJpaController;
 import controladores.UsuarioJpaController;
+import controladores.exceptions.NonexistentEntityException;
 import entidades.Cantidad;
 import entidades.Ingrediente;
 import entidades.Receta;
 import entidades.Usuario;
+import java.io.File;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.nio.file.PathMatcher;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 import recetario.Recetario;
@@ -142,7 +148,7 @@ public class Portada extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonLista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista2ActionPerformed
-        
+
         if (Recetario.usuario.getCodUsuario() != null) {
             PaginaLista recetas = new PaginaLista();
             recetas.pack();
@@ -162,39 +168,87 @@ public class Portada extends javax.swing.JFrame {
     }//GEN-LAST:event_botonAtrasActionPerformed
 
     private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
-        // TODO add your handling code here:
+        String[] nombres = {"usuario", "ingrediente", "receta", "cantidad"};
+        PathMatcher matcher = FileSystems.getDefault().getPathMatcher("regex:^.*[0-9]{4}-[0-9]{2}-[0-9]{2}[^.csv]?$");
+        Object[] listaPath = Backup.listarTodo("." + File.separator + "backup").filter((t) -> matcher.matches(t)).toList().toArray();
+        Object opcion = JOptionPane.showInputDialog(null, "Seleccione una copia de seguridad", "Elegir", JOptionPane.QUESTION_MESSAGE, null, listaPath, listaPath[0]);
+       Miscelanea.borrarBBDD();
+       
+        for (int i = 0; i < nombres.length; i++) {
+            List<String[]> lista = Backup.LeerFicherosTexto(opcion.toString() + File.separator + "%s.csv".formatted(nombres[i]));
+            
+            for (String[] strings : lista) {
+                switch (nombres[i]) {
+                    case "ingrediente":
+                        Ingrediente ingrediente = Miscelanea.convertirListingrediente(strings);
+                        controladorIngrediente.create(ingrediente);
+                        break;
+                    case "usuario":
+                        Usuario usuario=Miscelanea.convertirListusuario(strings);
+                        controladorUsuario.create(usuario);
+                        break;
+                    case "receta":
+                        Receta receta = Miscelanea.convertirListreceta(strings);
+                        controladorReceta.create(receta);
+                        break;
+                     case "cantidad":
+                        Cantidad cantidad = Miscelanea.convertirListcantidad(strings);
+                         try {
+                             controladorCantidad.create(cantidad);
+                         } catch (Exception e) {
+                             System.out.println(e);
+                         }
+                        
+
+                        break;
+                    default:
+                        System.out.println("nada");
+                        ;
+                }
+            }
+        }
+
     }//GEN-LAST:event_botonLista3ActionPerformed
 
     private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed
+
         String fecha = LocalDate.now().toString();
-        Stream<Path> directorios = Backup.listarTodo("./");
+        boolean existeDirectorio = Backup.listarTodo("." + File.separator).anyMatch((t) -> t.startsWith("." + File.separator + "backup"));
+
         List<Ingrediente> listaIngredientes = controladorIngrediente.findIngredienteEntities();
         List<Receta> listaRecetas = controladorReceta.findRecetaEntities();
         List<Usuario> listaUsuarios = controladorUsuario.findUsuarioEntities();
         List<Cantidad> listaCantidades = controladorCantidad.findCantidadEntities();
         
-        boolean existe = directorios.anyMatch((t) -> t.toString().equalsIgnoreCase("./backup"));
-        if (existe) {
-            boolean existeSubCarpeta=directorios.anyMatch((t) -> t.toString().equalsIgnoreCase("./backup/%s".formatted(fecha)));
-            if(!existeSubCarpeta){
-            Backup.crearDirectorios("./backup/%s".formatted(fecha));
-            String [] nombres = {"cantidad","ingrediente","receta","usuario"};
-            List[] listas = {
-                Backup.tranformarCantidad(listaCantidades),
-                Backup.tranformarListaIngrediente(listaIngredientes),
-                Backup.tranformarListaReceta(listaRecetas),
-                Backup.tranformarListaUsuario(listaUsuarios)};
-            for (int i = 0; i < listas.length; i++) {
-                Backup.escribirListaString(listas[i], "%s%s/%s%s".formatted("./backup/", fecha,nombres[i],".csv"));
+        for (int i = 0; i < listaIngredientes.size(); i++) {
+            Ingrediente get = listaIngredientes.get(i);
+            System.out.println(get.toString());
+        }
+        /*
+        La clase java.io.File contiene cuatro variables de separador estático.
+        separator: Un String del separador dependiendo de la plataforma. Para Windows, es \ y para Unix es /
+        separatorChar: Igual que separator pero nos da un Char
+        pathSeparator: Variable dependiente de la plataforma para separadores de ruta. Por ejemplo PATH o CLASSPATH Para Unix es : y para Windows es ; .
+        pathSeparatorChar: Igual que pathSeparator pero del tipo char
+         */
+        // ();
+        if (existeDirectorio) {
+            boolean creado = Backup.crearDirectorio(".%sbackup.%s%s".formatted(File.separator, File.separator, fecha));
+            if (creado) {
+                String[] nombres = {"cantidad", "ingrediente", "receta", "usuario"};
+                List[] listas = {
+                    Backup.tranformarCantidad(listaCantidades),
+                    Backup.tranformarListaIngrediente(listaIngredientes),
+                    Backup.tranformarListaReceta(listaRecetas),
+                    Backup.tranformarListaUsuario(listaUsuarios)};
+                for (int i = 0; i < listas.length; i++) {
+                    Backup.escribirListaString(listas[i], "%s%s/%s%s".formatted("./backup/", fecha, nombres[i], ".csv"));
+                }
             }
-            } else {
-                System.out.println("Arreglar linea 191 Portada");
-            }
-            
         } else {
             Backup.crearDirectorio("./backup");
         }
-        
+
     }//GEN-LAST:event_botonLista4ActionPerformed
 
 

@@ -129,7 +129,7 @@ public class Receta implements Serializable {
     public String toString() {
         
         
-        return  "%s;%s;%s;%s".formatted(this.codReceta,this.nombreReceta, this.elaboracion,this.creador);
+        return  "%s;%s;%s;%s".formatted(this.codReceta,this.nombreReceta, this.elaboracion,this.creador.getNombre());
     }
     
     

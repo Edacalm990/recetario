@@ -52,6 +52,7 @@ public class Usuario implements Serializable {
     private List<Receta> recetaList;
 
     public Usuario() {
+
     }
 
     public Usuario(String nombre, String apellido1, String apellido2, String email) {
@@ -59,6 +60,7 @@ public class Usuario implements Serializable {
         this.apellido1 = apellido1;
         this.apellido2=apellido2;
         this.email=email;
+
     }
     
     public Usuario(String nombre, String apellido1, String email) {
@@ -66,6 +68,7 @@ public class Usuario implements Serializable {
         this.apellido1 = apellido1;
         this.apellido2=apellido2;
         this.email=email;
+
     }
 
     public Integer getCodUsuario() {

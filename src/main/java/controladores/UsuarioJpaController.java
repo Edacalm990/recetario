@@ -57,6 +57,8 @@ public class UsuarioJpaController implements Serializable {
                 }
             }
             em.getTransaction().commit();
+        } catch (Exception ex){
+            System.out.println(ex);
         } finally {
             if (em != null) {
                 em.close();
@@ -184,6 +186,18 @@ public class UsuarioJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+            // Receta.findByNombreReceta
+      // Método añadido, usando una named query de la entidad ingrediente
+    public Usuario findByEmail(String email){
+        EntityManager em = getEntityManager();
+        // Se crea la query usando el nombre de la named query
+        Query q = em.createNamedQuery("Usuario.findByEmail");
+        // Se establece el parámetro de la consulta
+        q.setParameter("email", email);
+        
+        return (Usuario)q.getSingleResult();
     }
     
 }
