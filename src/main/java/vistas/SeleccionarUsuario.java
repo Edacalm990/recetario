@@ -142,7 +142,7 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
     private void cargarUsuarios() {
         jList1.setSelectedIndex(-1);
         listaBusqueda = controladorUsuario.findUsuarioEntities();
-        String[] listaIngredientesString = listaBusqueda.stream().map((t) -> "%s %s %s".formatted(t.getNombre(), t.getApellido1(), (t.getApellido2() != null) ? t.getApellido2() : "")).toList().toArray(new String[listaBusqueda.size()]);
+        String[] listaIngredientesString = listaBusqueda.stream().map((t) -> "%s".formatted(t.getNombre())).toList().toArray(new String[listaBusqueda.size()]);
         jList1.setListData(listaIngredientesString);
 
     }

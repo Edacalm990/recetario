@@ -4,23 +4,12 @@
  */
 package vistas;
 
-import controladores.CantidadJpaController;
-import controladores.IngredienteJpaController;
+
 import controladores.Miscelanea;
-import controladores.RecetaJpaController;
 import controladores.UsuarioJpaController;
-import entidades.Cantidad;
-import entidades.ChildWindow;
-import entidades.Ingrediente;
-import entidades.Receta;
 import entidades.Usuario;
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.swing.JOptionPane;
-import recetario.Recetario;
+
 
 /**
  *
@@ -52,12 +41,8 @@ public class CrearUsuario extends javax.swing.JFrame {
         botonLista5 = new javax.swing.JButton();
         nombre = new javax.swing.JLabel();
         nombre1 = new javax.swing.JLabel();
-        nombre3 = new javax.swing.JLabel();
-        nombre2 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
-        s2Apellido = new javax.swing.JTextField();
         nombres = new javax.swing.JTextField();
-        sApellido = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         botonLista4 = new javax.swing.JButton();
@@ -87,23 +72,13 @@ public class CrearUsuario extends javax.swing.JFrame {
 
         nombre.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         nombre.setForeground(new java.awt.Color(26, 150, 138));
-        nombre.setText("Nombre");
+        nombre.setText("Usuario");
         jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 190, 30));
 
         nombre1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         nombre1.setForeground(new java.awt.Color(26, 150, 138));
         nombre1.setText("Email");
-        jPanel1.add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 190, 30));
-
-        nombre3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        nombre3.setForeground(new java.awt.Color(26, 150, 138));
-        nombre3.setText("Segundo Apellido");
-        jPanel1.add(nombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 190, 30));
-
-        nombre2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        nombre2.setForeground(new java.awt.Color(26, 150, 138));
-        nombre2.setText("Primer Apellido");
-        jPanel1.add(nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 190, 30));
+        jPanel1.add(nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 190, 30));
 
         email.setBackground(new java.awt.Color(238, 244, 238));
         email.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
@@ -116,14 +91,7 @@ public class CrearUsuario extends javax.swing.JFrame {
                 emailActionPerformed(evt);
             }
         });
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 240, 30));
-
-        s2Apellido.setBackground(new java.awt.Color(238, 244, 238));
-        s2Apellido.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        s2Apellido.setForeground(new java.awt.Color(0, 102, 153));
-        s2Apellido.setText("...");
-        s2Apellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
-        jPanel1.add(s2Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 200, 30));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 240, 30));
 
         nombres.setBackground(new java.awt.Color(238, 244, 238));
         nombres.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
@@ -131,13 +99,6 @@ public class CrearUsuario extends javax.swing.JFrame {
         nombres.setText("...");
         nombres.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
         jPanel1.add(nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 320, 30));
-
-        sApellido.setBackground(new java.awt.Color(238, 244, 238));
-        sApellido.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        sApellido.setForeground(new java.awt.Color(0, 102, 153));
-        sApellido.setText("...");
-        sApellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
-        jPanel1.add(sApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 270, 30));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
         jScrollPane1.setForeground(new java.awt.Color(0, 102, 153));
@@ -196,22 +157,20 @@ public class CrearUsuario extends javax.swing.JFrame {
     private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
 
         if (nombres.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "El usuario debe tener un nombre");
+            JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
         } else {
             String tmp = """
                   Esta seguro de querer crear el usuario:
-                  %s %s %s
+                  %s 
                   %s
-                  """.formatted(nombres.getText(), sApellido.getText(), s2Apellido.getText(), email.getText());
+                  """.formatted(nombres.getText(), email.getText());
             boolean coincidencia = controladorUsuario.findUsuarioEntities().stream().anyMatch((t)
                     -> t.getNombre().equalsIgnoreCase(nombres.getText())
-                    && t.getApellido1().equalsIgnoreCase(sApellido.getText())
-                    && t.getApellido2().equalsIgnoreCase(s2Apellido.getText())
                     && t.getEmail().equalsIgnoreCase(t.getEmail()));
             if (!coincidencia
                     && JOptionPane.showConfirmDialog(null, tmp) == 0) {
                 try {
-                    controladorUsuario.create(new Usuario(nombres.getText(), sApellido.getText(), s2Apellido.getText(), email.getText()));
+                    controladorUsuario.create(new Usuario(nombres.getText(), email.getText()));
                     JOptionPane.showMessageDialog(null, "Usuario creado correctamente");
                     SeleccionarUsuario seleccionar = new SeleccionarUsuario();
                     seleccionar.pack();
@@ -220,6 +179,7 @@ public class CrearUsuario extends javax.swing.JFrame {
                     dispose();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "No se ha podido crear el usuario");
+                    System.out.println(e);
                 }
             } else if (coincidencia) {
                 JOptionPane.showMessageDialog(null, "Ese usuario ya existe");
@@ -229,8 +189,6 @@ public class CrearUsuario extends javax.swing.JFrame {
 
     private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed
         nombres.setText("");
-        sApellido.setText("");
-        s2Apellido.setText("");
         email.setText("");
     }//GEN-LAST:event_botonLista4ActionPerformed
 
@@ -262,10 +220,6 @@ public class CrearUsuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nombre;
     private javax.swing.JLabel nombre1;
-    private javax.swing.JLabel nombre2;
-    private javax.swing.JLabel nombre3;
     private javax.swing.JTextField nombres;
-    private javax.swing.JTextField s2Apellido;
-    private javax.swing.JTextField sApellido;
     // End of variables declaration//GEN-END:variables
 }

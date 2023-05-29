@@ -5,21 +5,19 @@
 package controladores;
 
 import controladores.exceptions.NonexistentEntityException;
+import entidades.Usuario;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entidades.Receta;
-import entidades.Usuario;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author eli
+ * @author venganzaalchocolate
  */
 public class UsuarioJpaController implements Serializable {
 
@@ -33,32 +31,12 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void create(Usuario usuario) {
-        if (usuario.getRecetaList() == null) {
-            usuario.setRecetaList(new ArrayList<Receta>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Receta> attachedRecetaList = new ArrayList<Receta>();
-            for (Receta recetaListRecetaToAttach : usuario.getRecetaList()) {
-                recetaListRecetaToAttach = em.getReference(recetaListRecetaToAttach.getClass(), recetaListRecetaToAttach.getCodReceta());
-                attachedRecetaList.add(recetaListRecetaToAttach);
-            }
-            usuario.setRecetaList(attachedRecetaList);
             em.persist(usuario);
-            for (Receta recetaListReceta : usuario.getRecetaList()) {
-                Usuario oldCreadorOfRecetaListReceta = recetaListReceta.getCreador();
-                recetaListReceta.setCreador(usuario);
-                recetaListReceta = em.merge(recetaListReceta);
-                if (oldCreadorOfRecetaListReceta != null) {
-                    oldCreadorOfRecetaListReceta.getRecetaList().remove(recetaListReceta);
-                    oldCreadorOfRecetaListReceta = em.merge(oldCreadorOfRecetaListReceta);
-                }
-            }
             em.getTransaction().commit();
-        } catch (Exception ex){
-            System.out.println(ex);
         } finally {
             if (em != null) {
                 em.close();
@@ -71,34 +49,7 @@ public class UsuarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuario persistentUsuario = em.find(Usuario.class, usuario.getCodUsuario());
-            List<Receta> recetaListOld = persistentUsuario.getRecetaList();
-            List<Receta> recetaListNew = usuario.getRecetaList();
-            List<Receta> attachedRecetaListNew = new ArrayList<Receta>();
-            for (Receta recetaListNewRecetaToAttach : recetaListNew) {
-                recetaListNewRecetaToAttach = em.getReference(recetaListNewRecetaToAttach.getClass(), recetaListNewRecetaToAttach.getCodReceta());
-                attachedRecetaListNew.add(recetaListNewRecetaToAttach);
-            }
-            recetaListNew = attachedRecetaListNew;
-            usuario.setRecetaList(recetaListNew);
             usuario = em.merge(usuario);
-            for (Receta recetaListOldReceta : recetaListOld) {
-                if (!recetaListNew.contains(recetaListOldReceta)) {
-                    recetaListOldReceta.setCreador(null);
-                    recetaListOldReceta = em.merge(recetaListOldReceta);
-                }
-            }
-            for (Receta recetaListNewReceta : recetaListNew) {
-                if (!recetaListOld.contains(recetaListNewReceta)) {
-                    Usuario oldCreadorOfRecetaListNewReceta = recetaListNewReceta.getCreador();
-                    recetaListNewReceta.setCreador(usuario);
-                    recetaListNewReceta = em.merge(recetaListNewReceta);
-                    if (oldCreadorOfRecetaListNewReceta != null && !oldCreadorOfRecetaListNewReceta.equals(usuario)) {
-                        oldCreadorOfRecetaListNewReceta.getRecetaList().remove(recetaListNewReceta);
-                        oldCreadorOfRecetaListNewReceta = em.merge(oldCreadorOfRecetaListNewReceta);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -127,11 +78,6 @@ public class UsuarioJpaController implements Serializable {
                 usuario.getCodUsuario();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
-            }
-            List<Receta> recetaList = usuario.getRecetaList();
-            for (Receta recetaListReceta : recetaList) {
-                recetaListReceta.setCreador(null);
-                recetaListReceta = em.merge(recetaListReceta);
             }
             em.remove(usuario);
             em.getTransaction().commit();
@@ -187,17 +133,19 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-    
-            // Receta.findByNombreReceta
-      // Método añadido, usando una named query de la entidad ingrediente
-    public Usuario findByEmail(String email){
+      //Usuario.findByNombre
+     public Usuario findByNombre(String nombre){
         EntityManager em = getEntityManager();
         // Se crea la query usando el nombre de la named query
-        Query q = em.createNamedQuery("Usuario.findByEmail");
+        Query q = em.createNamedQuery("Usuario.findByNombre");
         // Se establece el parámetro de la consulta
-        q.setParameter("email", email);
+        q.setParameter("nombre", nombre);
+        try {
+            Object tmp =q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
         
         return (Usuario)q.getSingleResult();
     }
-    
 }

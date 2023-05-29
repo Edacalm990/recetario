@@ -172,40 +172,43 @@ public class Portada extends javax.swing.JFrame {
         PathMatcher matcher = FileSystems.getDefault().getPathMatcher("regex:^.*[0-9]{4}-[0-9]{2}-[0-9]{2}[^.csv]?$");
         Object[] listaPath = Backup.listarTodo("." + File.separator + "backup").filter((t) -> matcher.matches(t)).toList().toArray();
         Object opcion = JOptionPane.showInputDialog(null, "Seleccione una copia de seguridad", "Elegir", JOptionPane.QUESTION_MESSAGE, null, listaPath, listaPath[0]);
-       Miscelanea.borrarBBDD();
-       
-        for (int i = 0; i < nombres.length; i++) {
-            List<String[]> lista = Backup.LeerFicherosTexto(opcion.toString() + File.separator + "%s.csv".formatted(nombres[i]));
-            
-            for (String[] strings : lista) {
-                switch (nombres[i]) {
-                    case "ingrediente":
-                        Ingrediente ingrediente = Miscelanea.convertirListingrediente(strings);
-                        controladorIngrediente.create(ingrediente);
-                        break;
-                    case "usuario":
-                        Usuario usuario=Miscelanea.convertirListusuario(strings);
-                        controladorUsuario.create(usuario);
-                        break;
-                    case "receta":
-                        Receta receta = Miscelanea.convertirListreceta(strings);
-                        controladorReceta.create(receta);
-                        break;
-                     case "cantidad":
-                        Cantidad cantidad = Miscelanea.convertirListcantidad(strings);
-                         try {
-                             controladorCantidad.create(cantidad);
-                         } catch (Exception e) {
-                             System.out.println(e);
-                         }
-                        
+        if (opcion != null) {
+            Backup.borrarBBDD();
 
-                        break;
-                    default:
-                        System.out.println("nada");
-                        ;
+            for (int i = 0; i < nombres.length; i++) {
+                List<String[]> lista = Backup.LeerFicherosTexto(opcion.toString() + File.separator + "%s.csv".formatted(nombres[i]));
+
+                for (String[] strings : lista) {
+                    switch (nombres[i]) {
+                        case "ingrediente":
+                            Ingrediente ingrediente = Backup.convertirListingrediente(strings);
+                            controladorIngrediente.create(ingrediente);
+                            break;
+                        case "usuario":
+                            Usuario usuario = Backup.convertirListusuario(strings);
+                            controladorUsuario.create(usuario);
+                            break;
+                        case "receta":
+                            Receta receta = Backup.convertirListreceta(strings);
+                            controladorReceta.create(receta);
+                            break;
+                        case "cantidad":
+                            Cantidad cantidad = Backup.convertirListcantidad(strings);
+                            try {
+                                controladorCantidad.create(cantidad);
+                            } catch (Exception e) {
+                                System.out.println(e);
+                            }
+
+                            break;
+                        default:
+                            System.out.println("nada");
+                            ;
+                    }
                 }
             }
+         Recetario.usuario=new Usuario();
+         jLabel3.setText("");
         }
 
     }//GEN-LAST:event_botonLista3ActionPerformed
@@ -219,11 +222,7 @@ public class Portada extends javax.swing.JFrame {
         List<Receta> listaRecetas = controladorReceta.findRecetaEntities();
         List<Usuario> listaUsuarios = controladorUsuario.findUsuarioEntities();
         List<Cantidad> listaCantidades = controladorCantidad.findCantidadEntities();
-        
-        for (int i = 0; i < listaIngredientes.size(); i++) {
-            Ingrediente get = listaIngredientes.get(i);
-            System.out.println(get.toString());
-        }
+
         /*
         La clase java.io.File contiene cuatro variables de separador estático.
         separator: Un String del separador dependiendo de la plataforma. Para Windows, es \ y para Unix es /

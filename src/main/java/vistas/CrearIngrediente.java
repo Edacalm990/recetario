@@ -94,13 +94,17 @@ public class CrearIngrediente extends javax.swing.JFrame {
 
     private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
         String nombre = jTextField1.getText();
-        try {
-            controladorIngrediente.findByNombreIngrediente(nombre.toLowerCase());
-            JOptionPane.showMessageDialog(null, "El ingrediente ya existe.");
-        } catch (Exception e) {
-            if (JOptionPane.showConfirmDialog(null, "Seguro que deseas crear el ingrediente %s".formatted(nombre.toLowerCase())) == 0) {
-                controladorIngrediente.create(new Ingrediente(nombre.toLowerCase()));
+        if (!nombre.isBlank()) {
+            try {
+                controladorIngrediente.findByNombreIngrediente(nombre.toLowerCase());
+                JOptionPane.showMessageDialog(null, "El ingrediente ya existe.");
+            } catch (Exception e) {
+                if (JOptionPane.showConfirmDialog(null, "Seguro que deseas crear el ingrediente %s".formatted(nombre.toLowerCase())) == 0) {
+                    controladorIngrediente.create(new Ingrediente(nombre.toLowerCase()));
+                }
             }
+        }  else {
+        JOptionPane.showMessageDialog(null, "No puedes dejar el nombre del ingrediente en blanco");
         }
     }//GEN-LAST:event_botonLista3ActionPerformed
 
@@ -111,7 +115,6 @@ public class CrearIngrediente extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonLista3;

@@ -26,11 +26,12 @@ import recetario.Recetario;
  */
 public class PaginaLista extends javax.swing.JFrame {
 
-    private List<Receta> listaRecetas;
+    
     RecetaJpaController controladorReceta = new RecetaJpaController(Miscelanea.getEntityManager());
     UsuarioJpaController controladorUsuario = new UsuarioJpaController(Miscelanea.getEntityManager());
     CantidadJpaController controladorCantidad = new CantidadJpaController(Miscelanea.getEntityManager());
     IngredienteJpaController controladorIngrediente = new IngredienteJpaController(Miscelanea.getEntityManager());
+   private List<Receta> listaRecetas;
     public static List<Ingrediente> listaIngredientes = new ArrayList<>();
     public static List<Integer> listaCantidades = new ArrayList<>();
 
@@ -498,9 +499,11 @@ public class PaginaLista extends javax.swing.JFrame {
 
     private void botonLEditar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLEditar2ActionPerformed
         int index = jList1.getAnchorSelectionIndex();
+        
         if (index != -1 && !listaIngredientes.isEmpty()) {
             Receta receta = listaRecetas.get(index);
             Receta recetaModificada = new Receta(receta.getCodReceta());
+//            Usuario creador=controladorUsuario.findByNombre(receta.getCreador().getNombre());
             recetaModificada.setCreador(receta.getCreador());
             recetaModificada.setNombreReceta(jTextField1.getText());
             recetaModificada.setElaboracion(jTextArea1.getText());
@@ -544,6 +547,7 @@ public class PaginaLista extends javax.swing.JFrame {
 
     private void cargarRecetas() {
         listaRecetas = controladorReceta.findRecetaEntities();
+        listaRecetas.forEach(System.out::println);
         String[] listaNombresRecetas = listaRecetas.stream().map((t) -> t.getNombreReceta()).toList().toArray(new String[listaRecetas.size()]);
         jList1.setListData(listaNombresRecetas);
         

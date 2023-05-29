@@ -11,9 +11,9 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entidades.Usuario;
 import entidades.Cantidad;
 import entidades.Receta;
+import entidades.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author eli
+ * @author venganzaalchocolate
  */
 public class RecetaJpaController implements Serializable {
 
@@ -42,11 +42,6 @@ public class RecetaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuario creador = receta.getCreador();
-            if (creador != null) {
-                creador = em.getReference(creador.getClass(), creador.getCodUsuario());
-                receta.setCreador(creador);
-            }
             List<Cantidad> attachedCantidadList = new ArrayList<Cantidad>();
             for (Cantidad cantidadListCantidadToAttach : receta.getCantidadList()) {
                 cantidadListCantidadToAttach = em.getReference(cantidadListCantidadToAttach.getClass(), cantidadListCantidadToAttach.getCantidadPK());
@@ -54,10 +49,6 @@ public class RecetaJpaController implements Serializable {
             }
             receta.setCantidadList(attachedCantidadList);
             em.persist(receta);
-            if (creador != null) {
-                creador.getRecetaList().add(receta);
-                creador = em.merge(creador);
-            }
             for (Cantidad cantidadListCantidad : receta.getCantidadList()) {
                 Receta oldRecetaOfCantidadListCantidad = cantidadListCantidad.getReceta();
                 cantidadListCantidad.setReceta(receta);
@@ -81,8 +72,6 @@ public class RecetaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Receta persistentReceta = em.find(Receta.class, receta.getCodReceta());
-            Usuario creadorOld = persistentReceta.getCreador();
-            Usuario creadorNew = receta.getCreador();
             List<Cantidad> cantidadListOld = persistentReceta.getCantidadList();
             List<Cantidad> cantidadListNew = receta.getCantidadList();
             List<String> illegalOrphanMessages = null;
@@ -97,10 +86,6 @@ public class RecetaJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            if (creadorNew != null) {
-                creadorNew = em.getReference(creadorNew.getClass(), creadorNew.getCodUsuario());
-                receta.setCreador(creadorNew);
-            }
             List<Cantidad> attachedCantidadListNew = new ArrayList<Cantidad>();
             for (Cantidad cantidadListNewCantidadToAttach : cantidadListNew) {
                 cantidadListNewCantidadToAttach = em.getReference(cantidadListNewCantidadToAttach.getClass(), cantidadListNewCantidadToAttach.getCantidadPK());
@@ -109,14 +94,6 @@ public class RecetaJpaController implements Serializable {
             cantidadListNew = attachedCantidadListNew;
             receta.setCantidadList(cantidadListNew);
             receta = em.merge(receta);
-            if (creadorOld != null && !creadorOld.equals(creadorNew)) {
-                creadorOld.getRecetaList().remove(receta);
-                creadorOld = em.merge(creadorOld);
-            }
-            if (creadorNew != null && !creadorNew.equals(creadorOld)) {
-                creadorNew.getRecetaList().add(receta);
-                creadorNew = em.merge(creadorNew);
-            }
             for (Cantidad cantidadListNewCantidad : cantidadListNew) {
                 if (!cantidadListOld.contains(cantidadListNewCantidad)) {
                     Receta oldRecetaOfCantidadListNewCantidad = cantidadListNewCantidad.getReceta();
@@ -167,11 +144,6 @@ public class RecetaJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            Usuario creador = receta.getCreador();
-            if (creador != null) {
-                creador.getRecetaList().remove(receta);
-                creador = em.merge(creador);
             }
             em.remove(receta);
             em.getTransaction().commit();
@@ -228,7 +200,7 @@ public class RecetaJpaController implements Serializable {
         }
     }
     
-    // Receta.findByNombreReceta
+      // Receta.findByNombreReceta
       // Método añadido, usando una named query de la entidad ingrediente
     public Receta findByNombreReceta(String nombre){
         EntityManager em = getEntityManager();
@@ -261,7 +233,5 @@ public class RecetaJpaController implements Serializable {
         
         return (Receta)q.getSingleResult();
     }
-         
-         
-    
+       
 }

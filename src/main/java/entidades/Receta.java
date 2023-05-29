@@ -127,8 +127,6 @@ public class Receta implements Serializable {
 
     @Override
     public String toString() {
-        
-        
         return  "%s;%s;%s;%s".formatted(this.codReceta,this.nombreReceta, this.elaboracion,this.creador.getNombre());
     }
     

@@ -1,5 +1,11 @@
 package controladores;
 
+import static controladores.Miscelanea.controladorCantidad;
+import static controladores.Miscelanea.controladorIngrediente;
+import static controladores.Miscelanea.controladorReceta;
+import static controladores.Miscelanea.controladorUsuario;
+import controladores.exceptions.IllegalOrphanException;
+import controladores.exceptions.NonexistentEntityException;
 import entidades.Cantidad;
 import entidades.Ingrediente;
 import entidades.Receta;
@@ -20,8 +26,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
+import vistas.Portada;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -194,6 +203,84 @@ public class Backup {
 }
     
     
+    public static Ingrediente convertirListingrediente(String[] listaString) {
+        Ingrediente tmp = new Ingrediente();
+        tmp.setCodIngrediente(Integer.valueOf(listaString[0]));
+        tmp.setNombreIngrediente(listaString[1]);
+        
+        return tmp;
+    }
+
+    public static Usuario convertirListusuario(String[] listaString) {
+        Usuario tmp = new Usuario();
+        tmp.setCodUsuario(Integer.valueOf(listaString[0]));
+        tmp.setNombre(listaString[1]);
+        tmp.setEmail(listaString[2]);
+        return tmp;
+    }
+    
+        public static Receta convertirListreceta(String[] listaString) {
+        Receta tmp = new Receta();
+        //tmp.setCodUsuario(Integer.valueOf(listaString[0]));
+        tmp.setCodReceta(Integer.valueOf(listaString[0]));
+        tmp.setNombreReceta(listaString[1]);
+        tmp.setElaboracion(listaString[2]);
+        Usuario usuario=controladorUsuario.findByNombre(listaString[3]);
+        tmp.setCreador(usuario);
+        return tmp;
+    }
+
+    public static Cantidad convertirListcantidad(String[] listaString) {
+
+        Ingrediente ingrediente=controladorIngrediente.findByNombreIngrediente(listaString[0]);
+        Receta receta=controladorReceta.findByNombreReceta(listaString[1]);
+        Cantidad tmp = new Cantidad(ingrediente, receta, Integer.parseInt(listaString[2]));
+        return tmp;
+    }
+
+    public static void borrarBBDD() {
+         controladorCantidad.findCantidadEntities().forEach((t) -> {
+            try {
+                controladorCantidad.destroy(t.getCantidadPK());
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(Miscelanea.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+         
+          controladorIngrediente.findIngredienteEntities().forEach((t) -> {
+            try {
+                controladorIngrediente.destroy(t.getCodIngrediente());
+            } catch (IllegalOrphanException ex) {
+                Logger.getLogger(Miscelanea.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(Miscelanea.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+          
+          controladorReceta.findRecetaEntities().forEach((t) -> {
+             try {
+                 controladorReceta.destroy(t.getCodReceta());
+             } catch (IllegalOrphanException ex) {
+                 Logger.getLogger(Miscelanea.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (NonexistentEntityException ex) {
+                 Logger.getLogger(Miscelanea.class.getName()).log(Level.SEVERE, null, ex);
+             }
+          });
+         
+        controladorUsuario.findUsuarioEntities().forEach((t) -> {
+            try {
+                controladorUsuario.destroy(t.getCodUsuario());
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(Portada.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        );
+        
+       
+        
+       
+    }
     
     
 }

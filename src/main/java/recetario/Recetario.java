@@ -6,6 +6,7 @@
 package recetario;
 
 import entidades.Usuario;
+import javax.swing.JOptionPane;
 import vistas.Portada;
 import vistas.SeleccionarUsuario;
 
@@ -20,5 +21,6 @@ public class Recetario {
         portada.pack();
         portada.setLocationRelativeTo(null);
         portada.setVisible(true);
+
     }
 }
