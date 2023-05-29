@@ -68,6 +68,8 @@ public class PaginaLista extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        und = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
         jTextField1 = new javax.swing.JTextField();
@@ -195,7 +197,18 @@ public class PaginaLista extends javax.swing.JFrame {
         jList3.setSelectionForeground(new java.awt.Color(238, 244, 238));
         jScrollPane3.setViewportView(jList3);
 
-        panelVerReceta.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 280, 50, 160));
+        panelVerReceta.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 280, 40, 160));
+
+        jScrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
+        jScrollPane4.setForeground(new java.awt.Color(238, 244, 238));
+
+        und.setBackground(new java.awt.Color(238, 244, 238));
+        und.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
+        und.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
+        und.setForeground(new java.awt.Color(0, 102, 153));
+        jScrollPane4.setViewportView(und);
+
+        panelVerReceta.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 280, 40, 160));
 
         jScrollPane1.setBackground(new java.awt.Color(238, 244, 238));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 244, 238)));
@@ -208,7 +221,7 @@ public class PaginaLista extends javax.swing.JFrame {
         jList2.setSelectionForeground(new java.awt.Color(238, 244, 238));
         jScrollPane1.setViewportView(jList2);
 
-        panelVerReceta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 280, 400, 170));
+        panelVerReceta.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 280, 360, 170));
 
         jTextField1.setBackground(new java.awt.Color(238, 244, 238));
         jTextField1.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
@@ -322,7 +335,6 @@ public class PaginaLista extends javax.swing.JFrame {
             List<String> ingredientes = receta.getCantidadList().stream().map((t) -> t.getIngrediente().getNombreIngrediente()).toList();
             String[] tmpIngredientes = ingredientes.toArray(new String[ingredientes.size()]);
             List<String> cantidad = receta.getCantidadList().stream().map((t) -> String.valueOf(t.getCantidad())).toList();
-            String[] tmpCantidad = cantidad.toArray(new String[cantidad.size()]);
 
             List<Ingrediente> listaIngreTmp = receta.getCantidadList().stream().map((t) -> t.getIngrediente()).toList();
 
@@ -335,7 +347,7 @@ public class PaginaLista extends javax.swing.JFrame {
                 int cantidadI = cantidadTmp.get(i);
                 listaCantidades.add(cantidadI);
             }
-
+            cargarTipoCantidad(receta);
             jTextField1.setText(nombre);
             jTextArea1.setText(elaboracion);
             actualizarIngredientePanel();
@@ -352,11 +364,33 @@ public class PaginaLista extends javax.swing.JFrame {
             botonLEditar2.setVisible(false);
         }
     }
+    
+    private void cargarTipoCantidad(Receta receta){
+        List<String> cantidad = receta.getCantidadList().stream().map((t) -> String.valueOf(t.getCantidad())).toList();
+        String[] tmpTipo=new String [cantidad.size()];
+            for (int i = 0; i < cantidad.size(); i++) {
+                String x = (Integer.parseInt(cantidad.get(i))>10)?"grs":"und";
+                tmpTipo[i]=x;
+            }
+         und.setListData(tmpTipo);
+    }
+    
+    private void cargarTipoCantidad(){
+        List<String> cantidad = listaCantidades.stream().map((t) -> String.valueOf(t)).toList();
+        String[] tmpTipo=new String [cantidad.size()];
+            for (int i = 0; i < cantidad.size(); i++) {
+                String x = (Integer.parseInt(cantidad.get(i))>10)?"grs":"und";
+                tmpTipo[i]=x;
+            }
+         und.setListData(tmpTipo);
+    }
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
 
         int index = jList1.getAnchorSelectionIndex();
+     
         if (index != -1
+                &&  listaRecetas.get(index).getCreador().equals(Recetario.usuario)
                 && JOptionPane.showConfirmDialog(null, "Seguro que deseas borrar la receta %s".formatted(listaRecetas.get(index).getNombreReceta())) == 0) {
             try {
                 for (int i = 0; i < listaRecetas.get(index).getCantidadList().size(); i++) {
@@ -368,6 +402,8 @@ public class PaginaLista extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "No se ha podido borrar la receta, %s".formatted(e));
             }
+        } else if( listaRecetas.get(index).getCreador().getCodUsuario()!=Recetario.usuario.getCodUsuario()) {
+        JOptionPane.showMessageDialog(null, "Solo el creador de la receta puede borrarla, el creador de la receta es: %s".formatted(listaRecetas.get(index).getCreador().getNombre()));
         }
         panelVerReceta.setVisible(false);
     }//GEN-LAST:event_botonBorrarActionPerformed
@@ -425,7 +461,7 @@ public class PaginaLista extends javax.swing.JFrame {
 
         }
         actualizarIngredientePanel();
-
+        cargarTipoCantidad();
     }//GEN-LAST:event_botonDeleteIActionPerformed
 
 
@@ -438,9 +474,8 @@ public class PaginaLista extends javax.swing.JFrame {
     }//GEN-LAST:event_botonAddIActionPerformed
 
     private void botonCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrear2ActionPerformed
-        String nombreReceta = jTextField1.getText();
-        String elaboracion = jTextArea1.getText();
-
+        String nombreReceta = jTextField1.getText().trim();
+        String elaboracion = jTextArea1.getText().trim().replaceAll("\n", " ");
         if (controladorReceta.findByNombreReceta(nombreReceta) == null && !listaIngredientes.isEmpty()) {
             if (JOptionPane.showConfirmDialog(null, "Seguro que deseas crear la receta %s".formatted(nombreReceta)) == 0) {
                 try {
@@ -497,8 +532,8 @@ public class PaginaLista extends javax.swing.JFrame {
             Receta recetaModificada = new Receta(receta.getCodReceta());
 //            Usuario creador=controladorUsuario.findByNombre(receta.getCreador().getNombre());
             recetaModificada.setCreador(receta.getCreador());
-            recetaModificada.setNombreReceta(jTextField1.getText());
-            recetaModificada.setElaboracion(jTextArea1.getText());
+            recetaModificada.setNombreReceta(jTextField1.getText().trim());
+            recetaModificada.setElaboracion( jTextArea1.getText().trim().replaceAll("\n", " "));
             try {
                 for (int i = 0; i <receta.getCantidadList().size(); i++) {
                     Cantidad get = receta.getCantidadList().get(i);
@@ -540,13 +575,15 @@ public class PaginaLista extends javax.swing.JFrame {
     private void cargarRecetas() {
         listaRecetas = controladorReceta.findRecetaEntities();
         listaRecetas.forEach(System.out::println);
-        String[] listaNombresRecetas = listaRecetas.stream().map((t) -> t.getNombreReceta()).toList().toArray(new String[listaRecetas.size()]);
+        String[] listaNombresRecetas = listaRecetas.stream().map((t) -> "%s - %s".formatted(t.getNombreReceta(), t.getCreador().getNombre())).toList().toArray(new String[listaRecetas.size()]);
         jList1.setListData(listaNombresRecetas);
         
     }
 
     public void childClosed(String windowName, WindowEvent e) {
         actualizarIngredientePanel();
+        cargarTipoCantidad();
+        
     }
 
     private void actualizarIngredientePanel() {
@@ -579,10 +616,12 @@ public class PaginaLista extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JScrollPane panelIndice;
     private javax.swing.JPanel panelVerReceta;
+    private javax.swing.JList<String> und;
     private javax.swing.JButton ver;
     // End of variables declaration//GEN-END:variables
 }

@@ -151,7 +151,6 @@ public class Backup {
         
         List<String> tmp=new ArrayList<>();
         for (Ingrediente ingrediente : lista) {
-            
             tmp.add(ingrediente.toString());
         }
     return tmp;
@@ -220,6 +219,10 @@ public class Backup {
     
         public static Receta convertirListreceta(String[] listaString) {
         Receta tmp = new Receta();
+            for (int i = 0; i < listaString.length; i++) {
+                String string = listaString[i];
+                System.out.println(string);
+            }
         //tmp.setCodUsuario(Integer.valueOf(listaString[0]));
         tmp.setCodReceta(Integer.valueOf(listaString[0]));
         tmp.setNombreReceta(listaString[1]);
