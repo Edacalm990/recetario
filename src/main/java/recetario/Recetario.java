@@ -15,6 +15,7 @@ import vistas.SeleccionarUsuario;
  * @author venganzaalchocolate
  */
 public class Recetario {
+    // variable global para la creación de recetas de esta manera se comican la clase crearUsuario, seleccionarUsuario y paginaLista
     public static Usuario usuario=new Usuario();
     public static void main(String[] args) {
         Portada portada= new Portada();

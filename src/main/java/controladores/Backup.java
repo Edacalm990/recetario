@@ -41,6 +41,7 @@ import vistas.Portada;
  *
  * @author venganzaalchocolate
  */
+// clase con métodos estaticos para crear y restaurar el backup
 public class Backup {
        public static boolean crearDirectorio(String ruta) {
 
