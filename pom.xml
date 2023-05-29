@@ -57,11 +57,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
+        
     </dependencies>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+    <maven.compiler.source>18</maven.compiler.source>
+    <maven.compiler.target>18</maven.compiler.target>
         <exec.mainClass>recetario.recetario.Recetario</exec.mainClass>
     </properties>
 </project>

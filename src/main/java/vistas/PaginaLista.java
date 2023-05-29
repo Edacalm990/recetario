@@ -376,7 +376,7 @@ public class PaginaLista extends javax.swing.JFrame {
         listaCantidades.clear();
         listaIngredientes.clear();
         int index = jList1.getAnchorSelectionIndex();
-        if (index != -1) {
+        if (index != -1 && Recetario.usuario.equals(listaRecetas.get(index).getCreador())) {
 
             cargarReceta(index);
             botonAddI.setVisible(true);
@@ -387,6 +387,10 @@ public class PaginaLista extends javax.swing.JFrame {
             jLabelCreaReceta.setVisible(false);
             jLabelEditaReceta.setVisible(true);
             botonLEditar2.setVisible(true);
+        } else if (index == -1){
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una receta");
+        } else {
+            JOptionPane.showMessageDialog(null, "Solo el creador de la receta puede modificarla. El creador de esta receta es: %s".formatted(listaRecetas.get(index).getNombreReceta()));
         }
     }//GEN-LAST:event_botonLEditar1ActionPerformed
 
@@ -484,18 +488,6 @@ public class PaginaLista extends javax.swing.JFrame {
     }
 
     
-
-    private Ingrediente ingredienteAux(Receta receta) {
-        controladorIngrediente.create(new Ingrediente("auxiliar"));
-        Ingrediente aux = controladorIngrediente.findByNombreIngrediente("auxiliar");
-        try {
-            controladorCantidad.create(new Cantidad(aux, receta, 0));
-        } catch (Exception e) {
-            System.out.println("No se ha podido crear el ingrediente auxiliar");
-        }
-        return aux;
-    }
-
 
     private void botonLEditar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLEditar2ActionPerformed
         int index = jList1.getAnchorSelectionIndex();

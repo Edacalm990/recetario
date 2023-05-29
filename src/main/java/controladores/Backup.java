@@ -153,7 +153,6 @@ public class Backup {
         for (Ingrediente ingrediente : lista) {
             
             tmp.add(ingrediente.toString());
-            System.out.println(ingrediente.toString());
         }
     return tmp;
     }
@@ -169,7 +168,6 @@ public class Backup {
     public static List<String> tranformarCantidad(List<Cantidad> lista){
         List<String> tmp=new ArrayList<>();
         for (Cantidad cantidad : lista) {
-            System.out.println(cantidad.toString());
             tmp.add(cantidad.toString());
         }
     return tmp;

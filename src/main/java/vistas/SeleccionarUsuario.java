@@ -158,7 +158,6 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
                 System.out.println(e);
             }
             
-            System.out.println(Recetario.usuario.toString());
             Portada portada = new Portada();
             portada.pack();
             portada.setLocationRelativeTo(null);

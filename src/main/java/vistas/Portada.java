@@ -232,7 +232,7 @@ public class Portada extends javax.swing.JFrame {
          */
         // ();
         if (existeDirectorio) {
-            boolean creado = Backup.crearDirectorio(".%sbackup.%s%s".formatted(File.separator, File.separator, fecha));
+            boolean creado = Backup.crearDirectorio(".%sbackup%s%s".formatted(File.separator, File.separator, fecha));
             if (creado) {
                 String[] nombres = {"cantidad", "ingrediente", "receta", "usuario"};
                 List[] listas = {
@@ -241,7 +241,7 @@ public class Portada extends javax.swing.JFrame {
                     Backup.tranformarListaReceta(listaRecetas),
                     Backup.tranformarListaUsuario(listaUsuarios)};
                 for (int i = 0; i < listas.length; i++) {
-                    Backup.escribirListaString(listas[i], "%s%s/%s%s".formatted("./backup/", fecha, nombres[i], ".csv"));
+                    Backup.escribirListaString(listas[i], ".%sbackup%s%s%s%s%s".formatted(File.separator, File.separator, fecha,File.separator, nombres[i], ".csv"));
                 }
             }
         } else {

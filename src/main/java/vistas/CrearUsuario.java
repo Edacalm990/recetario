@@ -156,14 +156,15 @@ public class CrearUsuario extends javax.swing.JFrame {
 
     private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
 
-        if (nombres.getText().isBlank()) {
+        if (nombres.getText().isBlank() || email.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
         } else {
-            String tmp = """
-                  Esta seguro de querer crear el usuario:
-                  %s 
-                  %s
-                  """.formatted(nombres.getText(), email.getText());
+            String tmp =
+                    """
+                    Esta seguro de querer crear el usuario: 
+                    %s 
+                    %s
+                    """.formatted(nombres.getText(), email.getText());
             boolean coincidencia = controladorUsuario.findUsuarioEntities().stream().anyMatch((t)
                     -> t.getNombre().equalsIgnoreCase(nombres.getText())
                     && t.getEmail().equalsIgnoreCase(t.getEmail()));

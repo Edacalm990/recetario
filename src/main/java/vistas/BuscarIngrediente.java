@@ -27,11 +27,10 @@ public class BuscarIngrediente extends ChildWindow {
     /**
      * Creates new form buscarIngrediente
      */
-
     public BuscarIngrediente(PaginaLista mainWindow, String windowName) {
         super(mainWindow, windowName);
         initComponents();
-         listaBusqueda = new ArrayList<>();
+        listaBusqueda = new ArrayList<>();
     }
 
     /**
@@ -170,17 +169,23 @@ public class BuscarIngrediente extends ChildWindow {
     private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
         int index = jList1.getAnchorSelectionIndex();
         jList1.setSelectedIndex(-1);
+        int confirmacion =-1 ;
         if (index != -1
-                && !PaginaLista.listaIngredientes.contains(listaBusqueda.get(index))
-                && JOptionPane.showConfirmDialog(null, "Seguro que deseas añadir el ingrediente %s".formatted(listaBusqueda.get(index).getNombreIngrediente())) == 0) {
-            try {
-                PaginaLista.listaCantidades.add(pedirCantidad());
-                PaginaLista.listaIngredientes.add(listaBusqueda.get(index));
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "No se ha podido borrar añadir el ingrediente %s".formatted(e));
+                && !PaginaLista.listaIngredientes.contains(listaBusqueda.get(index))) {
+            confirmacion = JOptionPane.showConfirmDialog(null, "Seguro que deseas añadir el ingrediente %s".formatted(listaBusqueda.get(index).getNombreIngrediente()));
+            if (confirmacion == 0) {
+                try {
+                    PaginaLista.listaCantidades.add(pedirCantidad());
+                    PaginaLista.listaIngredientes.add(listaBusqueda.get(index));
+                    JOptionPane.showMessageDialog(null, "Se ha añadido el ingrediente correctamente");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "No se ha podido borrar añadir el ingrediente %s".formatted(e));
+                }
+            } else  {
+            JOptionPane.showMessageDialog(null, "No se ha añadido el ingrediente");
             }
-        } else if (index==-1){
-          JOptionPane.showMessageDialog(null, "Debes seleccionar un ingrediente");
+        } else if (index == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un ingrediente");
         } else {
             JOptionPane.showMessageDialog(null, "La receta ya tiene ese ingrediente");
         }
@@ -190,10 +195,10 @@ public class BuscarIngrediente extends ChildWindow {
         boolean condicion = true;
         do {
             try {
-            String cantidad = JOptionPane.showInputDialog("Cantidad ?");
-            int cantidadI= Integer.parseInt(cantidad);
-            condicion=false;
-            return cantidadI;
+                String cantidad = JOptionPane.showInputDialog("Cantidad ?");
+                int cantidadI = Integer.parseInt(cantidad);
+                condicion = false;
+                return cantidadI;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Debes poner un número entero");
             }
@@ -202,7 +207,7 @@ public class BuscarIngrediente extends ChildWindow {
     }
 
     private void botonLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista1ActionPerformed
-        CrearIngrediente ventanaIngrediente=new CrearIngrediente();
+        CrearIngrediente ventanaIngrediente = new CrearIngrediente();
         ventanaIngrediente.pack();
         ventanaIngrediente.setLocationRelativeTo(null);
         ventanaIngrediente.setVisible(true);
