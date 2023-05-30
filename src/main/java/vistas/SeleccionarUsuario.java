@@ -58,9 +58,9 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        botonLista1 = new javax.swing.JButton();
-        botonLista4 = new javax.swing.JButton();
-        botonLista3 = new javax.swing.JButton();
+        crearUsuario = new javax.swing.JButton();
+        eliminarUsuario = new javax.swing.JButton();
+        aceptarUsuario = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -84,42 +84,42 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 230, 270));
 
-        botonLista1.setBackground(new java.awt.Color(179, 57, 170));
-        botonLista1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLista1.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista1.setText("+");
-        botonLista1.setActionCommand("crear");
-        botonLista1.setBorderPainted(false);
-        botonLista1.addActionListener(new java.awt.event.ActionListener() {
+        crearUsuario.setBackground(new java.awt.Color(179, 57, 170));
+        crearUsuario.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        crearUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        crearUsuario.setText("+");
+        crearUsuario.setActionCommand("crear");
+        crearUsuario.setBorderPainted(false);
+        crearUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista1ActionPerformed(evt);
+                crearUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 60, 50));
+        jPanel1.add(crearUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 60, 50));
 
-        botonLista4.setBackground(new java.awt.Color(252, 167, 46));
-        botonLista4.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLista4.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista4.setText("-");
-        botonLista4.setBorderPainted(false);
-        botonLista4.addActionListener(new java.awt.event.ActionListener() {
+        eliminarUsuario.setBackground(new java.awt.Color(252, 167, 46));
+        eliminarUsuario.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        eliminarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        eliminarUsuario.setText("-");
+        eliminarUsuario.setBorderPainted(false);
+        eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista4ActionPerformed(evt);
+                eliminarUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 60, 50));
+        jPanel1.add(eliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 60, 50));
 
-        botonLista3.setBackground(new java.awt.Color(179, 57, 170));
-        botonLista3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLista3.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista3.setText("Aceptar");
-        botonLista3.setBorderPainted(false);
-        botonLista3.addActionListener(new java.awt.event.ActionListener() {
+        aceptarUsuario.setBackground(new java.awt.Color(179, 57, 170));
+        aceptarUsuario.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        aceptarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        aceptarUsuario.setText("Aceptar");
+        aceptarUsuario.setBorderPainted(false);
+        aceptarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista3ActionPerformed(evt);
+                aceptarUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 130, 50));
+        jPanel1.add(aceptarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 130, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/seleccionarUsuario.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -147,14 +147,14 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
 
     }
 
-    private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
+    private void aceptarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarUsuarioActionPerformed
         int index = jList1.getAnchorSelectionIndex();
         jList1.setSelectedIndex(-1);
         if (index != -1) {
             try {
+                // cuando seleccinamos un usuario modificamos la variable estática del main para que paginaLista tenga acceso
                 Recetario.usuario = listaBusqueda.get(index);
             } catch ( ArrayIndexOutOfBoundsException e) {
-                // TODO TERMINAR
                 System.out.println(e);
             }
             
@@ -166,18 +166,18 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes seleccionar un usuario");
         }
-    }//GEN-LAST:event_botonLista3ActionPerformed
+    }//GEN-LAST:event_aceptarUsuarioActionPerformed
 
-    private void botonLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista1ActionPerformed
+    private void crearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearUsuarioActionPerformed
         CrearUsuario crearUsuario = new CrearUsuario();
         crearUsuario.pack();
         crearUsuario.setLocationRelativeTo(null);
         crearUsuario.setVisible(true);
         dispose();
-    }//GEN-LAST:event_botonLista1ActionPerformed
+    }//GEN-LAST:event_crearUsuarioActionPerformed
 
-
-    private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed
+// si eliminamos un usuario eliminamos todas las recetas asociadas
+    private void eliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarUsuarioActionPerformed
         int index = jList1.getAnchorSelectionIndex();
         jList1.setSelectedIndex(-1);
         jList1.clearSelection();
@@ -205,16 +205,16 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se ha podido borrar el usuario %s".formatted(e));
             }
         }
-    }//GEN-LAST:event_botonLista4ActionPerformed
+    }//GEN-LAST:event_eliminarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonLista1;
-    private javax.swing.JButton botonLista3;
-    private javax.swing.JButton botonLista4;
+    private javax.swing.JButton aceptarUsuario;
+    private javax.swing.JButton crearUsuario;
+    private javax.swing.JButton eliminarUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;

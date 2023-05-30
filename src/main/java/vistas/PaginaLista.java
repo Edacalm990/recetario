@@ -28,9 +28,7 @@ public class PaginaLista extends javax.swing.JFrame {
 
     
     RecetaJpaController controladorReceta = new RecetaJpaController(Miscelanea.getEntityManager());
-    UsuarioJpaController controladorUsuario = new UsuarioJpaController(Miscelanea.getEntityManager());
     CantidadJpaController controladorCantidad = new CantidadJpaController(Miscelanea.getEntityManager());
-    IngredienteJpaController controladorIngrediente = new IngredienteJpaController(Miscelanea.getEntityManager());
    private List<Receta> listaRecetas;
     public static List<Ingrediente> listaIngredientes = new ArrayList<>();
     public static List<Integer> listaCantidades = new ArrayList<>();
@@ -39,7 +37,6 @@ public class PaginaLista extends javax.swing.JFrame {
      * Creates new form PaginaLista
      */
     public PaginaLista() {
-
         listaRecetas = new ArrayList<>();
         initComponents();
         panelVerReceta.setVisible(false);
@@ -59,9 +56,9 @@ public class PaginaLista extends javax.swing.JFrame {
         panelIndice = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         botonAtras = new javax.swing.JButton();
-        botonBorrar = new javax.swing.JButton();
-        botonCrear1 = new javax.swing.JButton();
-        botonLEditar1 = new javax.swing.JButton();
+        botonBorrarReceta = new javax.swing.JButton();
+        botonCrearReceta = new javax.swing.JButton();
+        botonEditar = new javax.swing.JButton();
         ver = new javax.swing.JButton();
         panelVerReceta = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -73,10 +70,10 @@ public class PaginaLista extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
         jTextField1 = new javax.swing.JTextField();
-        botonDeleteI = new javax.swing.JButton();
-        botonAddI = new javax.swing.JButton();
-        botonCrear2 = new javax.swing.JButton();
-        botonLEditar2 = new javax.swing.JButton();
+        botonDeleteIngrediente = new javax.swing.JButton();
+        botonAddIngrediente = new javax.swing.JButton();
+        botonAceptarCrearReceta = new javax.swing.JButton();
+        botonGuardarEditar = new javax.swing.JButton();
         jLabelReceta = new javax.swing.JLabel();
         jLabelCreaReceta = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -120,41 +117,41 @@ public class PaginaLista extends javax.swing.JFrame {
         });
         jPanel1.add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 880, -1, -1));
 
-        botonBorrar.setBackground(new java.awt.Color(252, 167, 46));
-        botonBorrar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonBorrar.setForeground(new java.awt.Color(255, 255, 255));
-        botonBorrar.setText("-");
-        botonBorrar.setBorderPainted(false);
-        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
+        botonBorrarReceta.setBackground(new java.awt.Color(252, 167, 46));
+        botonBorrarReceta.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonBorrarReceta.setForeground(new java.awt.Color(255, 255, 255));
+        botonBorrarReceta.setText("-");
+        botonBorrarReceta.setBorderPainted(false);
+        botonBorrarReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBorrarActionPerformed(evt);
+                botonBorrarRecetaActionPerformed(evt);
             }
         });
-        jPanel1.add(botonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 880, 60, 50));
+        jPanel1.add(botonBorrarReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 880, 60, 50));
 
-        botonCrear1.setBackground(new java.awt.Color(179, 57, 170));
-        botonCrear1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonCrear1.setForeground(new java.awt.Color(255, 255, 255));
-        botonCrear1.setText("+");
-        botonCrear1.setBorderPainted(false);
-        botonCrear1.addActionListener(new java.awt.event.ActionListener() {
+        botonCrearReceta.setBackground(new java.awt.Color(179, 57, 170));
+        botonCrearReceta.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonCrearReceta.setForeground(new java.awt.Color(255, 255, 255));
+        botonCrearReceta.setText("+");
+        botonCrearReceta.setBorderPainted(false);
+        botonCrearReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCrear1ActionPerformed(evt);
+                botonCrearRecetaActionPerformed(evt);
             }
         });
-        jPanel1.add(botonCrear1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 880, 60, 50));
+        jPanel1.add(botonCrearReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 880, 60, 50));
 
-        botonLEditar1.setBackground(new java.awt.Color(252, 167, 46));
-        botonLEditar1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLEditar1.setForeground(new java.awt.Color(255, 255, 255));
-        botonLEditar1.setText("Editar");
-        botonLEditar1.setBorderPainted(false);
-        botonLEditar1.addActionListener(new java.awt.event.ActionListener() {
+        botonEditar.setBackground(new java.awt.Color(252, 167, 46));
+        botonEditar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonEditar.setForeground(new java.awt.Color(255, 255, 255));
+        botonEditar.setText("Editar");
+        botonEditar.setBorderPainted(false);
+        botonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLEditar1ActionPerformed(evt);
+                botonEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLEditar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 880, 110, 50));
+        jPanel1.add(botonEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 880, 110, 50));
 
         ver.setBackground(new java.awt.Color(252, 167, 46));
         ver.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
@@ -237,53 +234,53 @@ public class PaginaLista extends javax.swing.JFrame {
         jTextField1.setVerifyInputWhenFocusTarget(false);
         panelVerReceta.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 137, 490, 30));
 
-        botonDeleteI.setBackground(new java.awt.Color(252, 167, 46));
-        botonDeleteI.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonDeleteI.setForeground(new java.awt.Color(255, 255, 255));
-        botonDeleteI.setText("-");
-        botonDeleteI.setBorderPainted(false);
-        botonDeleteI.addActionListener(new java.awt.event.ActionListener() {
+        botonDeleteIngrediente.setBackground(new java.awt.Color(252, 167, 46));
+        botonDeleteIngrediente.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonDeleteIngrediente.setForeground(new java.awt.Color(255, 255, 255));
+        botonDeleteIngrediente.setText("-");
+        botonDeleteIngrediente.setBorderPainted(false);
+        botonDeleteIngrediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonDeleteIActionPerformed(evt);
+                botonDeleteIngredienteActionPerformed(evt);
             }
         });
-        panelVerReceta.add(botonDeleteI, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 210, 50, 50));
+        panelVerReceta.add(botonDeleteIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 210, 50, 50));
 
-        botonAddI.setBackground(new java.awt.Color(179, 57, 170));
-        botonAddI.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonAddI.setForeground(new java.awt.Color(255, 255, 255));
-        botonAddI.setText("+");
-        botonAddI.setBorderPainted(false);
-        botonAddI.addActionListener(new java.awt.event.ActionListener() {
+        botonAddIngrediente.setBackground(new java.awt.Color(179, 57, 170));
+        botonAddIngrediente.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonAddIngrediente.setForeground(new java.awt.Color(255, 255, 255));
+        botonAddIngrediente.setText("+");
+        botonAddIngrediente.setBorderPainted(false);
+        botonAddIngrediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAddIActionPerformed(evt);
+                botonAddIngredienteActionPerformed(evt);
             }
         });
-        panelVerReceta.add(botonAddI, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 210, 50, 50));
+        panelVerReceta.add(botonAddIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 210, 50, 50));
 
-        botonCrear2.setBackground(new java.awt.Color(179, 57, 170));
-        botonCrear2.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonCrear2.setForeground(new java.awt.Color(255, 255, 255));
-        botonCrear2.setText("Crear Receta");
-        botonCrear2.setBorderPainted(false);
-        botonCrear2.addActionListener(new java.awt.event.ActionListener() {
+        botonAceptarCrearReceta.setBackground(new java.awt.Color(179, 57, 170));
+        botonAceptarCrearReceta.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonAceptarCrearReceta.setForeground(new java.awt.Color(255, 255, 255));
+        botonAceptarCrearReceta.setText("Crear Receta");
+        botonAceptarCrearReceta.setBorderPainted(false);
+        botonAceptarCrearReceta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCrear2ActionPerformed(evt);
+                botonAceptarCrearRecetaActionPerformed(evt);
             }
         });
-        panelVerReceta.add(botonCrear2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 880, 180, 50));
+        panelVerReceta.add(botonAceptarCrearReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 880, 180, 50));
 
-        botonLEditar2.setBackground(new java.awt.Color(252, 167, 46));
-        botonLEditar2.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLEditar2.setForeground(new java.awt.Color(255, 255, 255));
-        botonLEditar2.setText("Guardar");
-        botonLEditar2.setBorderPainted(false);
-        botonLEditar2.addActionListener(new java.awt.event.ActionListener() {
+        botonGuardarEditar.setBackground(new java.awt.Color(252, 167, 46));
+        botonGuardarEditar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonGuardarEditar.setForeground(new java.awt.Color(255, 255, 255));
+        botonGuardarEditar.setText("Guardar");
+        botonGuardarEditar.setBorderPainted(false);
+        botonGuardarEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLEditar2ActionPerformed(evt);
+                botonGuardarEditarActionPerformed(evt);
             }
         });
-        panelVerReceta.add(botonLEditar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 880, 130, 50));
+        panelVerReceta.add(botonGuardarEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 880, 130, 50));
 
         jLabelReceta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/receta.png"))); // NOI18N
         panelVerReceta.add(jLabelReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 480, 90));
@@ -320,11 +317,12 @@ public class PaginaLista extends javax.swing.JFrame {
     private void verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verActionPerformed
         int index = jList1.getAnchorSelectionIndex();
 
-        botonAddI.setVisible(false);
-        botonDeleteI.setVisible(false);
+        botonAddIngrediente.setVisible(false);
+        botonDeleteIngrediente.setVisible(false);
         cargarReceta(index);
     }//GEN-LAST:event_verActionPerformed
 
+    // método que muestra una receta en el panel derecho y pone los botones correspondientes en visibles o no visibles
     private void cargarReceta(int index) {
         listaCantidades.clear();
         listaIngredientes.clear();
@@ -354,17 +352,19 @@ public class PaginaLista extends javax.swing.JFrame {
 
             panelVerReceta.setVisible(true);
             jLabelReceta.setVisible(true);
-            botonAddI.setVisible(false);
-            botonDeleteI.setVisible(false);
+            botonAddIngrediente.setVisible(false);
+            botonDeleteIngrediente.setVisible(false);
             jTextField1.setFocusable(false);
             jTextArea1.setEditable(false);
             jLabelCreaReceta.setVisible(false);
             jLabelEditaReceta.setVisible(false);
-            botonCrear2.setVisible(false);
-            botonLEditar2.setVisible(false);
+            botonAceptarCrearReceta.setVisible(false);
+            botonGuardarEditar.setVisible(false);
         }
     }
     
+    // pone los datos del panel intermedio entre cantidad y nombre de ingrediente, si es menos de 10 serán und si es más serán grs
+    // s eutiliza cuando la receta ya está creada
     private void cargarTipoCantidad(Receta receta){
         List<String> cantidad = receta.getCantidadList().stream().map((t) -> String.valueOf(t.getCantidad())).toList();
         String[] tmpTipo=new String [cantidad.size()];
@@ -375,6 +375,8 @@ public class PaginaLista extends javax.swing.JFrame {
          und.setListData(tmpTipo);
     }
     
+     // pone los datos del panel intermedio entre cantidad y nombre de ingrediente, si es menos de 10 serán und si es más serán grs
+    // se utiliza mientras se está creando la receta pero todavía no se ha guardado
     private void cargarTipoCantidad(){
         List<String> cantidad = listaCantidades.stream().map((t) -> String.valueOf(t)).toList();
         String[] tmpTipo=new String [cantidad.size()];
@@ -385,7 +387,8 @@ public class PaginaLista extends javax.swing.JFrame {
          und.setListData(tmpTipo);
     }
 
-    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
+            //  borra una receta siempre y cuando el usuario que está loggeado sea el creador
+    private void botonBorrarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarRecetaActionPerformed
 
         int index = jList1.getAnchorSelectionIndex();
      
@@ -406,32 +409,34 @@ public class PaginaLista extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Solo el creador de la receta puede borrarla, el creador de la receta es: %s".formatted(listaRecetas.get(index).getCreador().getNombre()));
         }
         panelVerReceta.setVisible(false);
-    }//GEN-LAST:event_botonBorrarActionPerformed
-
-    private void botonLEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLEditar1ActionPerformed
+    }//GEN-LAST:event_botonBorrarRecetaActionPerformed
+// edita una recta siempre que el usaurio que esté logeado sea el creador
+    private void botonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarActionPerformed
         listaCantidades.clear();
         listaIngredientes.clear();
         int index = jList1.getAnchorSelectionIndex();
         if (index != -1 && Recetario.usuario.equals(listaRecetas.get(index).getCreador())) {
 
             cargarReceta(index);
-            botonAddI.setVisible(true);
-            botonDeleteI.setVisible(true);
+            botonAddIngrediente.setVisible(true);
+            botonDeleteIngrediente.setVisible(true);
             jTextField1.setFocusable(true);
             jTextArea1.setEditable(true);
             jLabelReceta.setVisible(false);
             jLabelCreaReceta.setVisible(false);
             jLabelEditaReceta.setVisible(true);
-            botonLEditar2.setVisible(true);
+            botonGuardarEditar.setVisible(true);
         } else if (index == -1){
             JOptionPane.showMessageDialog(null, "Debes seleccionar una receta");
         } else {
             JOptionPane.showMessageDialog(null, "Solo el creador de la receta puede modificarla. El creador de esta receta es: %s".formatted(listaRecetas.get(index).getNombreReceta()));
         }
-    }//GEN-LAST:event_botonLEditar1ActionPerformed
+    }//GEN-LAST:event_botonEditarActionPerformed
 
 
-    private void botonCrear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrear1ActionPerformed
+    // pone el panel de la derecha con los botones e iconos correspondientes
+    private void botonCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearRecetaActionPerformed
+        und.setListData(new String [0]);
         listaCantidades.clear();
         listaIngredientes.clear();
         actualizarIngredientePanel();
@@ -441,17 +446,18 @@ public class PaginaLista extends javax.swing.JFrame {
         jList2.setListData(new String[0]);
         jTextField1.setFocusable(true);
         jTextArea1.setEditable(true);
-        botonAddI.setVisible(true);
-        botonDeleteI.setVisible(true);
+        botonAddIngrediente.setVisible(true);
+        botonDeleteIngrediente.setVisible(true);
         jLabelReceta.setVisible(false);
         jLabelCreaReceta.setVisible(true);
         jLabelEditaReceta.setVisible(false);
-        botonCrear2.setVisible(true);
-        botonLEditar2.setVisible(false);
+        botonAceptarCrearReceta.setVisible(true);
+        botonGuardarEditar.setVisible(false);
 
-    }//GEN-LAST:event_botonCrear1ActionPerformed
+    }//GEN-LAST:event_botonCrearRecetaActionPerformed
 
-    private void botonDeleteIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDeleteIActionPerformed
+    // elimina un ingrediente de la lista 
+    private void botonDeleteIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDeleteIngredienteActionPerformed
         int index = jList2.getAnchorSelectionIndex();
         jList2.setSelectedIndex(-1);
         if (index != -1) {
@@ -462,18 +468,21 @@ public class PaginaLista extends javax.swing.JFrame {
         }
         actualizarIngredientePanel();
         cargarTipoCantidad();
-    }//GEN-LAST:event_botonDeleteIActionPerformed
+    }//GEN-LAST:event_botonDeleteIngredienteActionPerformed
 
 
-    private void botonAddIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAddIActionPerformed
+    // añade un ingrediente a la lista
+    private void botonAddIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAddIngredienteActionPerformed
         BuscarIngrediente buscarIngrediente = new BuscarIngrediente(this, "buscaIngrediente");
         buscarIngrediente.pack();
         buscarIngrediente.setLocationRelativeTo(null);
         buscarIngrediente.setVisible(true);
         
-    }//GEN-LAST:event_botonAddIActionPerformed
+    }//GEN-LAST:event_botonAddIngredienteActionPerformed
 
-    private void botonCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrear2ActionPerformed
+    // crea la receta con los datos 
+    private void botonAceptarCrearRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarCrearRecetaActionPerformed
+        
         String nombreReceta = jTextField1.getText().trim();
         String elaboracion = jTextArea1.getText().trim().replaceAll("\n", " ");
         if (controladorReceta.findByNombreReceta(nombreReceta) == null && !listaIngredientes.isEmpty()) {
@@ -482,11 +491,12 @@ public class PaginaLista extends javax.swing.JFrame {
                     Receta receta = new Receta();
                     receta.setNombreReceta(nombreReceta);
                     receta.setElaboracion(elaboracion);
-                    // ------------------
+                    // ------------------ el creador se coge del login, una variable estática creada en el main
                     receta.setCreador(Recetario.usuario);
                     // ------------------
                     controladorReceta.create(receta);
                     crearCantidad(receta);
+                    // actualiza los paneles
                     cargarRecetas();
                     cargarReceta(listaRecetas.size() - 1);
 
@@ -503,8 +513,9 @@ public class PaginaLista extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_botonCrear2ActionPerformed
+    }//GEN-LAST:event_botonAceptarCrearRecetaActionPerformed
 
+    // crea objetos tipo cantidad (tabla intermedia de una relacion n:m en la bbdd entre receta e ingrediente)
     private void crearCantidad(Receta receta) {
         for (int i = 0; i < listaIngredientes.size(); i++) {
             Ingrediente get = listaIngredientes.get(i);
@@ -523,14 +534,14 @@ public class PaginaLista extends javax.swing.JFrame {
     }
 
     
-
-    private void botonLEditar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLEditar2ActionPerformed
+// edita la receta y guarda
+    private void botonGuardarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarEditarActionPerformed
         int index = jList1.getAnchorSelectionIndex();
         
         if (index != -1 && !listaIngredientes.isEmpty()) {
             Receta receta = listaRecetas.get(index);
             Receta recetaModificada = new Receta(receta.getCodReceta());
-//            Usuario creador=controladorUsuario.findByNombre(receta.getCreador().getNombre());
+            // crea una receta temporal con los cambios
             recetaModificada.setCreador(receta.getCreador());
             recetaModificada.setNombreReceta(jTextField1.getText().trim());
             recetaModificada.setElaboracion( jTextArea1.getText().trim().replaceAll("\n", " "));
@@ -561,7 +572,7 @@ public class PaginaLista extends javax.swing.JFrame {
         } else if (listaIngredientes.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se puede crear una receta sin ingredientes");
         }
-    }//GEN-LAST:event_botonLEditar2ActionPerformed
+    }//GEN-LAST:event_botonGuardarEditarActionPerformed
 
     private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
         Portada portada = new Portada();
@@ -572,14 +583,15 @@ public class PaginaLista extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonAtrasActionPerformed
 
+    // muestra una lista con el nombre de las recetas
     private void cargarRecetas() {
         listaRecetas = controladorReceta.findRecetaEntities();
-        listaRecetas.forEach(System.out::println);
         String[] listaNombresRecetas = listaRecetas.stream().map((t) -> "%s - %s".formatted(t.getNombreReceta(), t.getCreador().getNombre())).toList().toArray(new String[listaRecetas.size()]);
         jList1.setListData(listaNombresRecetas);
         
     }
 
+    // si la ventana hija se cierra (buscarIngrediente) se actualizan los paneles
     public void childClosed(String windowName, WindowEvent e) {
         actualizarIngredientePanel();
         cargarTipoCantidad();
@@ -596,14 +608,14 @@ public class PaginaLista extends javax.swing.JFrame {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonAddI;
+    private javax.swing.JButton botonAceptarCrearReceta;
+    private javax.swing.JButton botonAddIngrediente;
     private javax.swing.JButton botonAtras;
-    private javax.swing.JButton botonBorrar;
-    private javax.swing.JButton botonCrear1;
-    private javax.swing.JButton botonCrear2;
-    private javax.swing.JButton botonDeleteI;
-    private javax.swing.JButton botonLEditar1;
-    private javax.swing.JButton botonLEditar2;
+    private javax.swing.JButton botonBorrarReceta;
+    private javax.swing.JButton botonCrearReceta;
+    private javax.swing.JButton botonDeleteIngrediente;
+    private javax.swing.JButton botonEditar;
+    private javax.swing.JButton botonGuardarEditar;
     private javax.swing.JLabel indiceLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelCreaReceta;

@@ -35,8 +35,8 @@ public class CrearIngrediente extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
-        botonLista3 = new javax.swing.JButton();
-        botonLista4 = new javax.swing.JButton();
+        crearIngrediente = new javax.swing.JButton();
+        atras = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,29 +51,29 @@ public class CrearIngrediente extends javax.swing.JFrame {
         jTextField1.setSelectionColor(new java.awt.Color(0, 102, 153));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 490, 40));
 
-        botonLista3.setBackground(new java.awt.Color(179, 57, 170));
-        botonLista3.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        botonLista3.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista3.setText("Añadir");
-        botonLista3.setBorderPainted(false);
-        botonLista3.addActionListener(new java.awt.event.ActionListener() {
+        crearIngrediente.setBackground(new java.awt.Color(179, 57, 170));
+        crearIngrediente.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        crearIngrediente.setForeground(new java.awt.Color(255, 255, 255));
+        crearIngrediente.setText("Añadir");
+        crearIngrediente.setBorderPainted(false);
+        crearIngrediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista3ActionPerformed(evt);
+                crearIngredienteActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 130, 50));
+        jPanel1.add(crearIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 130, 50));
 
-        botonLista4.setBackground(new java.awt.Color(252, 167, 46));
-        botonLista4.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        botonLista4.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista4.setText("<-");
-        botonLista4.setBorderPainted(false);
-        botonLista4.addActionListener(new java.awt.event.ActionListener() {
+        atras.setBackground(new java.awt.Color(252, 167, 46));
+        atras.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        atras.setForeground(new java.awt.Color(255, 255, 255));
+        atras.setText("<-");
+        atras.setBorderPainted(false);
+        atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista4ActionPerformed(evt);
+                atrasActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 70, 50));
+        jPanel1.add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 70, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearIngrediente.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 510));
@@ -92,10 +92,12 @@ public class CrearIngrediente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
+    // crea un ingrediente siempre que no exista
+    private void crearIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearIngredienteActionPerformed
         String nombre = jTextField1.getText();
         if (!nombre.isBlank()) {
             try {
+                // se usa una namedQuery
                 controladorIngrediente.findByNombreIngrediente(nombre.toLowerCase());
                 JOptionPane.showMessageDialog(null, "El ingrediente ya existe.");
             } catch (Exception e) {
@@ -106,19 +108,19 @@ public class CrearIngrediente extends javax.swing.JFrame {
         }  else {
         JOptionPane.showMessageDialog(null, "No puedes dejar el nombre del ingrediente en blanco");
         }
-    }//GEN-LAST:event_botonLista3ActionPerformed
+    }//GEN-LAST:event_crearIngredienteActionPerformed
 
-    private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
         dispose();
-    }//GEN-LAST:event_botonLista4ActionPerformed
+    }//GEN-LAST:event_atrasActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonLista3;
-    private javax.swing.JButton botonLista4;
+    private javax.swing.JButton atras;
+    private javax.swing.JButton crearIngrediente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;

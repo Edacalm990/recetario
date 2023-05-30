@@ -27,6 +27,7 @@ public class BuscarIngrediente extends ChildWindow {
     /**
      * Creates new form buscarIngrediente
      */
+    // buscarIngrediente es hija de paginaLista, extends ChildWindows, de esta manera cuando se cierre paginaLista carga los datos de los ingredientes autómaticamente
     public BuscarIngrediente(PaginaLista mainWindow, String windowName) {
         super(mainWindow, windowName);
         initComponents();
@@ -43,31 +44,31 @@ public class BuscarIngrediente extends ChildWindow {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        botonLista5 = new javax.swing.JButton();
+        atras = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        botonLista1 = new javax.swing.JButton();
-        botonLista2 = new javax.swing.JButton();
-        botonLista4 = new javax.swing.JButton();
-        botonLista3 = new javax.swing.JButton();
+        botonCrearIngrediente = new javax.swing.JButton();
+        buscar = new javax.swing.JButton();
+        botonEliminarIngrediente = new javax.swing.JButton();
+        botonaddIng = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        botonLista5.setBackground(new java.awt.Color(252, 167, 46));
-        botonLista5.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        botonLista5.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista5.setText("<-");
-        botonLista5.setBorderPainted(false);
-        botonLista5.addActionListener(new java.awt.event.ActionListener() {
+        atras.setBackground(new java.awt.Color(252, 167, 46));
+        atras.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        atras.setForeground(new java.awt.Color(255, 255, 255));
+        atras.setText("<-");
+        atras.setBorderPainted(false);
+        atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista5ActionPerformed(evt);
+                atrasActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 440, 70, 50));
+        jPanel1.add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 440, 70, 50));
 
         jTextField1.setBackground(new java.awt.Color(238, 244, 238));
         jTextField1.setFont(new java.awt.Font("Segoe Print", 1, 24)); // NOI18N
@@ -88,54 +89,54 @@ public class BuscarIngrediente extends ChildWindow {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 510, 210));
 
-        botonLista1.setBackground(new java.awt.Color(179, 57, 170));
-        botonLista1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLista1.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista1.setText("+");
-        botonLista1.setActionCommand("crear");
-        botonLista1.setBorderPainted(false);
-        botonLista1.addActionListener(new java.awt.event.ActionListener() {
+        botonCrearIngrediente.setBackground(new java.awt.Color(179, 57, 170));
+        botonCrearIngrediente.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonCrearIngrediente.setForeground(new java.awt.Color(255, 255, 255));
+        botonCrearIngrediente.setText("crear");
+        botonCrearIngrediente.setActionCommand("crear");
+        botonCrearIngrediente.setBorderPainted(false);
+        botonCrearIngrediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista1ActionPerformed(evt);
+                botonCrearIngredienteActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 60, 50));
+        jPanel1.add(botonCrearIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 90, 50));
 
-        botonLista2.setBackground(new java.awt.Color(252, 167, 46));
-        botonLista2.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        botonLista2.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista2.setText("Buscar");
-        botonLista2.setBorderPainted(false);
-        botonLista2.addActionListener(new java.awt.event.ActionListener() {
+        buscar.setBackground(new java.awt.Color(252, 167, 46));
+        buscar.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        buscar.setForeground(new java.awt.Color(255, 255, 255));
+        buscar.setText("Buscar");
+        buscar.setBorderPainted(false);
+        buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista2ActionPerformed(evt);
+                buscarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 140, 50));
+        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 140, 50));
 
-        botonLista4.setBackground(new java.awt.Color(252, 167, 46));
-        botonLista4.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLista4.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista4.setText("-");
-        botonLista4.setBorderPainted(false);
-        botonLista4.addActionListener(new java.awt.event.ActionListener() {
+        botonEliminarIngrediente.setBackground(new java.awt.Color(252, 167, 46));
+        botonEliminarIngrediente.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonEliminarIngrediente.setForeground(new java.awt.Color(255, 255, 255));
+        botonEliminarIngrediente.setText("eliminar");
+        botonEliminarIngrediente.setBorderPainted(false);
+        botonEliminarIngrediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista4ActionPerformed(evt);
+                botonEliminarIngredienteActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 60, 50));
+        jPanel1.add(botonEliminarIngrediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 120, 50));
 
-        botonLista3.setBackground(new java.awt.Color(179, 57, 170));
-        botonLista3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLista3.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista3.setText("Añadir");
-        botonLista3.setBorderPainted(false);
-        botonLista3.addActionListener(new java.awt.event.ActionListener() {
+        botonaddIng.setBackground(new java.awt.Color(179, 57, 170));
+        botonaddIng.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonaddIng.setForeground(new java.awt.Color(255, 255, 255));
+        botonaddIng.setText("Añadir");
+        botonaddIng.setBorderPainted(false);
+        botonaddIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista3ActionPerformed(evt);
+                botonaddIngActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 130, 50));
+        jPanel1.add(botonaddIng, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 130, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 510));
@@ -154,10 +155,11 @@ public class BuscarIngrediente extends ChildWindow {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonLista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista2ActionPerformed
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         cargarIngredientes();
-    }//GEN-LAST:event_botonLista2ActionPerformed
+    }//GEN-LAST:event_buscarActionPerformed
 
+    // cargar ingredientes, método que busca coincidencias, si no se escibe nada te muestra todos los ingredientes
     private void cargarIngredientes() {
         jList1.setSelectedIndex(-1);
         listaBusqueda = controladorIngrediente.findIngredienteEntities().stream().filter((t) -> t.getNombreIngrediente().contains(jTextField1.getText().toLowerCase())).toList();
@@ -166,7 +168,8 @@ public class BuscarIngrediente extends ChildWindow {
 
     }
 
-    private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
+   
+    private void botonaddIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonaddIngActionPerformed
         int index = jList1.getAnchorSelectionIndex();
         jList1.setSelectedIndex(-1);
         int confirmacion =-1 ;
@@ -189,8 +192,9 @@ public class BuscarIngrediente extends ChildWindow {
         } else {
             JOptionPane.showMessageDialog(null, "La receta ya tiene ese ingrediente");
         }
-    }//GEN-LAST:event_botonLista3ActionPerformed
+    }//GEN-LAST:event_botonaddIngActionPerformed
 
+    // método que pide la cantidad del ingrediente, si no se le pasa un entero salta un mensaje y vuelve a pedirte la cantidad
     private int pedirCantidad() {
         boolean condicion = true;
         do {
@@ -206,14 +210,15 @@ public class BuscarIngrediente extends ChildWindow {
         return 0;
     }
 
-    private void botonLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista1ActionPerformed
+    private void botonCrearIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearIngredienteActionPerformed
         CrearIngrediente ventanaIngrediente = new CrearIngrediente();
         ventanaIngrediente.pack();
         ventanaIngrediente.setLocationRelativeTo(null);
         ventanaIngrediente.setVisible(true);
-    }//GEN-LAST:event_botonLista1ActionPerformed
+    }//GEN-LAST:event_botonCrearIngredienteActionPerformed
 
-    private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed
+    // elimina un ingrediente siempre y cuando no esté asociado a una receta
+    private void botonEliminarIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarIngredienteActionPerformed
         int index = jList1.getAnchorSelectionIndex();
         if (index != -1
                 && JOptionPane.showConfirmDialog(null, "Seguro que deseas borrar el ingrediente %s".formatted(listaBusqueda.get(index).getNombreIngrediente())) == 0) {
@@ -221,25 +226,26 @@ public class BuscarIngrediente extends ChildWindow {
                 controladorIngrediente.destroy(listaBusqueda.get(index).getCodIngrediente());
                 cargarIngredientes();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "No se ha podido borrar el ingrediente %s".formatted(e));
+                JOptionPane.showMessageDialog(null, "No se ha podido borrar el ingrediente, ya que existe una receta con ese ingrediente");
             }
         }
-    }//GEN-LAST:event_botonLista4ActionPerformed
+    }//GEN-LAST:event_botonEliminarIngredienteActionPerformed
 
-    private void botonLista5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista5ActionPerformed
+    // cierra ventana
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
         dispose();
-    }//GEN-LAST:event_botonLista5ActionPerformed
+    }//GEN-LAST:event_atrasActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonLista1;
-    private javax.swing.JButton botonLista2;
-    private javax.swing.JButton botonLista3;
-    private javax.swing.JButton botonLista4;
-    private javax.swing.JButton botonLista5;
+    private javax.swing.JButton atras;
+    private javax.swing.JButton botonCrearIngrediente;
+    private javax.swing.JButton botonEliminarIngrediente;
+    private javax.swing.JButton botonaddIng;
+    private javax.swing.JButton buscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;

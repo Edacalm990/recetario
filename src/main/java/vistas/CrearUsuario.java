@@ -38,15 +38,15 @@ public class CrearUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        botonLista5 = new javax.swing.JButton();
+        botonAtras = new javax.swing.JButton();
         nombre = new javax.swing.JLabel();
         nombre1 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         nombres = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        botonLista4 = new javax.swing.JButton();
-        botonLista3 = new javax.swing.JButton();
+        botonReset = new javax.swing.JButton();
+        botonAceptar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -58,17 +58,17 @@ public class CrearUsuario extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(576, 510));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        botonLista5.setBackground(new java.awt.Color(252, 167, 46));
-        botonLista5.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        botonLista5.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista5.setText("<-");
-        botonLista5.setBorderPainted(false);
-        botonLista5.addActionListener(new java.awt.event.ActionListener() {
+        botonAtras.setBackground(new java.awt.Color(252, 167, 46));
+        botonAtras.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
+        botonAtras.setForeground(new java.awt.Color(255, 255, 255));
+        botonAtras.setText("<-");
+        botonAtras.setBorderPainted(false);
+        botonAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista5ActionPerformed(evt);
+                botonAtrasActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 70, 50));
+        jPanel1.add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 70, 50));
 
         nombre.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         nombre.setForeground(new java.awt.Color(26, 150, 138));
@@ -111,29 +111,29 @@ public class CrearUsuario extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 230, 270));
 
-        botonLista4.setBackground(new java.awt.Color(252, 167, 46));
-        botonLista4.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLista4.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista4.setText("Reset");
-        botonLista4.setBorderPainted(false);
-        botonLista4.addActionListener(new java.awt.event.ActionListener() {
+        botonReset.setBackground(new java.awt.Color(252, 167, 46));
+        botonReset.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonReset.setForeground(new java.awt.Color(255, 255, 255));
+        botonReset.setText("Reset");
+        botonReset.setBorderPainted(false);
+        botonReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista4ActionPerformed(evt);
+                botonResetActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 100, 50));
+        jPanel1.add(botonReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 100, 50));
 
-        botonLista3.setBackground(new java.awt.Color(179, 57, 170));
-        botonLista3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        botonLista3.setForeground(new java.awt.Color(255, 255, 255));
-        botonLista3.setText("Aceptar");
-        botonLista3.setBorderPainted(false);
-        botonLista3.addActionListener(new java.awt.event.ActionListener() {
+        botonAceptar.setBackground(new java.awt.Color(179, 57, 170));
+        botonAceptar.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        botonAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        botonAceptar.setText("Aceptar");
+        botonAceptar.setBorderPainted(false);
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonLista3ActionPerformed(evt);
+                botonAceptarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonLista3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 130, 50));
+        jPanel1.add(botonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 130, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/CrearUsuario.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -153,8 +153,8 @@ public class CrearUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    private void botonLista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista3ActionPerformed
+// se crea un usuario pero es obligatorio rellenar los campos
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
 
         if (nombres.getText().isBlank() || email.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
@@ -186,34 +186,35 @@ public class CrearUsuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Ese usuario ya existe");
             }
         }
-    }//GEN-LAST:event_botonLista3ActionPerformed
+    }//GEN-LAST:event_botonAceptarActionPerformed
 
-    private void botonLista4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista4ActionPerformed
+    // borra los campos
+    private void botonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResetActionPerformed
         nombres.setText("");
         email.setText("");
-    }//GEN-LAST:event_botonLista4ActionPerformed
+    }//GEN-LAST:event_botonResetActionPerformed
 
     private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emailActionPerformed
 
-    private void botonLista5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLista5ActionPerformed
+    private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
         SeleccionarUsuario seleccionar = new SeleccionarUsuario();
         seleccionar.pack();
         seleccionar.setLocationRelativeTo(null);
         seleccionar.setVisible(true);
 
         dispose();
-    }//GEN-LAST:event_botonLista5ActionPerformed
+    }//GEN-LAST:event_botonAtrasActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonLista3;
-    private javax.swing.JButton botonLista4;
-    private javax.swing.JButton botonLista5;
+    private javax.swing.JButton botonAceptar;
+    private javax.swing.JButton botonAtras;
+    private javax.swing.JButton botonReset;
     private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<String> jList1;

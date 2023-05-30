@@ -32,8 +32,11 @@ public class Miscelanea {
         // EntityManager permite realizar operaciones con la BD
         // Se obtiene a través del EntityManagerFactory y este a su vez se genera
         // a partir del nombre de la unidad de persistencia (fichero persistence.xml)
+        //-----------------------------------------------
+        // esta frase comentada la descomento cuando estoy en ubuntu y comento la de abajo y viceversa cuando estoy en windows
         //EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("recetario_Recetario_jar_1.0-SNAPSHOTPU");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("recetario_Windows");
+        //-----------------------------------------------
         EntityManager em = entityManagerFactory.createEntityManager();
         return entityManagerFactory;
     }
